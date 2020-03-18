@@ -100,11 +100,15 @@
               </div>
 
               <div class="form-group">
-                <label for="localidad">Localidad  </label>
-                    <input type="integer" name="localidad" class="form-control" value="{{ old('localidad') }}">
+                  <label for="localidad">Localidad  </label>
+                    <select name="localidad" class="form-control">
+                      @foreach( $localidades as $category )
+                        <option>{{ $category->municipio }}</option>
+                      @endforeach
+                    </select>
               </div>
 
-              <div class="form-group">
+             <div class="form-group">
                 <label for="tipo_hecho">Tipo de Hecho a Denunciar  </label>
                     <input type="integer" name="tipo_hecho" class="form-control" value="{{ old('tipo_hecho') }}">
               </div>

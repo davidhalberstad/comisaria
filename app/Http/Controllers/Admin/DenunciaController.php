@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Denuncias;
+use App\Localidad;
 
 class DenunciaController extends Controller
 {
@@ -13,8 +14,10 @@ class DenunciaController extends Controller
     public function index()
     {
         $denuncias = Denuncias::all();
+        $localidades = Localidad::all();
 
-        return view('admin.denuncias.index')->with(compact('denuncias'));
+        return view('admin.denuncias.index')->with(compact('denuncias', 'localidades'));
+
     }
 
     public function store(Request $request)

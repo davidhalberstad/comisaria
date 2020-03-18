@@ -14,7 +14,6 @@ Route::get('/reportar', 'HomeController@getReport');
 Route::post('/reportar', 'HomeController@postReport');
 
 
-
 Route::group(['middleware'=>'admin', 'namespace'=>'Admin'], function (){
 
 
@@ -26,6 +25,7 @@ Route::group(['middleware'=>'admin', 'namespace'=>'Admin'], function (){
     Route::post('/denuncia/{id}', 'DenunciaController@update');
 
     Route::get('/denuncia/{id}/eliminar', 'DenunciaController@delete');
+
 
     // // Users
     // Route::get('/usuarios', 'UserController@index');
