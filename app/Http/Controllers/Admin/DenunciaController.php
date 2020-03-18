@@ -14,11 +14,9 @@ class DenunciaController extends Controller
     public function index()
     {
         $denuncias = Denuncias::all();
-        $localidades = Localidad::all();
+        $localidades = Localidad::all()->orderBy('name', 'desc')->get();
 
         return view('admin.denuncias.index')->with(compact('denuncias', 'localidades'));
-
-
     }
 
     public function store(Request $request)
