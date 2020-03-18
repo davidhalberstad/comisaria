@@ -4,7 +4,7 @@
 <div class="card">
     <div class="card-header">Editar Denuncia</div>
 
-        <div class="panel-body">
+      <div class="panel-body">
             @if(session('notification'))
                 <div class="alert alert-success">
                     {{ session('notification') }}
@@ -101,8 +101,13 @@
             </div>
 
             <div class="form-group">
-              <label for="localidad">Localidad  </label>
-                  <input type="integer" name="localidad" class="form-control" value="{{ $denuncia->localidad }}">
+                <label for="localidad">Localidad  </label>
+                  <select name="localidad" class="form-control">
+                    @foreach( $localidades as $category )
+                     <!-- <option value="{{ $category->id }}">{{ $category->municipio }}</option> -->
+                     <option value="{{ $category->id }}" @if($denuncia->localidad=== $category->id) selected='selected' @endif>{{ $category->municipio }}</option>
+                    @endforeach
+                  </select>
             </div>
 
             <div class="form-group">

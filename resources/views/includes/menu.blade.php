@@ -1,36 +1,63 @@
-
-@if(auth()->check())
-<div class="card border-info mb-3" style="max-width: 18rem;">
-  <div class="card-header">Menu</div>
-    <div class="card-body">
-      <ul class="nav flex-column">
-        <!-- @if(auth()->check()) -->
-          <li><a href="#">Dashboard </a></li>
-
-          @if(! auth()->user()->is_client)
-          <li><a href="{{ url('home') }}">Ver Denuncias </a></li>
-          @endif
-
-          <!-- <li><a href="reportar">Rerportar Incidencias </a></li> -->
-
-          @if(auth()->user()->is_admin)
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Administracion</a>
-            <div class="dropdown-menu">
-              <!-- <a class="dropdown-item" href="usuarios">Usuarios</a> -->
-              <a class="dropdown-item" href="{{ url('denuncias') }}">Denuncias</a>
-              <!-- <a class="dropdown-item" href="proyectos">Proyectos</a>
-              <a class="dropdown-item" href="#">Configuracion</a> -->
-           </div>
-          </li>
-          @endif
-
-        <!-- @else
-          <li><a href="#">Bienvenido </a></li>
-          <!-- <li><a href="#">Instrucciones </a></li>
-          <li><a href="#">Creditos </a></li> -->
-        @endif -->
+<nav class="mt-2">
+  <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+    <!-- Panel de Control del Calificador -->
+    <li class="nav-item has-treeview menu-open">
+      <a href="#" class="nav-link active">
+        <i class="nav-icon fas fa-tachometer-alt"></i>
+        <p>
+          Modulo Calificador
+          <i class="right fas fa-angle-left"></i>
+        </p>
+      </a>
+      <ul class="nav nav-treeview">
+        <li class="nav-item">
+          <a href="admin" class="nav-link active">
+            <i class="far fa-circle nav-icon"></i>
+            <p>Ver Calificacion</p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link">
+            <i class="far fa-circle nav-icon"></i>
+            <p>Inactive Page</p>
+          </a>
+        </li>
       </ul>
-    </div>
-</div>
-@endif
+    </li>
+
+    <!-- Panel de Control de RRHH -->
+    <li class="nav-item has-treeview menu-open">
+      <a href="#" class="nav-link active">
+        <i class="nav-icon fas fa-tachometer-alt"></i>
+        <p>
+          Modulo de RRHH
+          <i class="right fas fa-angle-left"></i>
+        </p>
+      </a>
+      <ul class="nav nav-treeview">
+        <li class="nav-item">
+          <a href="admin" class="nav-link active">
+            <i class="far fa-circle nav-icon"></i>
+            <p>Ver Calificacion</p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link">
+            <i class="far fa-circle nav-icon"></i>
+            <p>Inactive Page</p>
+          </a>
+        </li>
+      </ul>
+    </li>
+
+    <li class="nav-item">
+      <a href="#" class="nav-link">
+        <i class="nav-icon fas fa-th"></i>
+        <p>
+          Simple Link
+          <span class="right badge badge-danger">New</span>
+        </p>
+      </a>
+    </li>
+  </ul>
+</nav>

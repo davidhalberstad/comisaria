@@ -103,7 +103,7 @@
                   <label for="localidad">Localidad  </label>
                     <select name="localidad" class="form-control">
                       @foreach( $localidades as $category )
-                        <option>{{ $category->municipio }}</option>
+                       <option value="{{ $category->id }}">{{ $category->municipio }}</option>
                       @endforeach
                     </select>
               </div>

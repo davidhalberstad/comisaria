@@ -18,6 +18,7 @@ class DenunciaController extends Controller
 
         return view('admin.denuncias.index')->with(compact('denuncias', 'localidades'));
 
+
     }
 
     public function store(Request $request)
@@ -75,8 +76,9 @@ class DenunciaController extends Controller
     public function edit($id)
     {
         $denuncia = Denuncias::find($id);
+        $localidades = Localidad::all();
 
-        return view('admin.denuncias.edit')->with(compact('denuncia'));
+        return view('admin.denuncias.edit')->with(compact('denuncia', 'localidades'));
     }
 
 //Update
