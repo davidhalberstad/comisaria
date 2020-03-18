@@ -115,7 +115,7 @@
 
               <div class="form-group">
                 <label for="relato">Relato  </label>
-                <textarea name="relato" id="relato" rows="5" cols="100">{{ old('relato') }}</textarea>
+                <textarea name="relato" id="relato" rows="5" cols="128">{{ old('relato') }}</textarea>
               </div>
 
               <div class="form-group">
