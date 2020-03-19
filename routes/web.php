@@ -1,7 +1,7 @@
 <?php
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
 Auth::routes();
@@ -14,6 +14,7 @@ Route::get('/reportar', 'HomeController@getReport');
 Route::post('/reportar', 'HomeController@postReport');
 
 
+
 Route::group(['middleware'=>'admin', 'namespace'=>'Admin'], function (){
 
 
@@ -21,11 +22,13 @@ Route::group(['middleware'=>'admin', 'namespace'=>'Admin'], function (){
     Route::get('/denuncias', 'DenunciaController@index')->name('denuncias');
     Route::post('/denuncias', 'DenunciaController@store');
 
-    Route::get('/denuncia/{id}', 'DenunciaController@edit');
+    Route::get('/denuncia/{id}', 'DenunciaController@edit')->name('edit');
     Route::post('/denuncia/{id}', 'DenunciaController@update');
 
-    Route::get('/denuncia/{id}/eliminar', 'DenunciaController@delete');
+    Route::get('/denuncia/{id}/eliminar', 'DenunciaController@delete')->name('delete');
 
+
+  Route::resource('/denuncia', 'DenunciaController');
 
     // // Users
     // Route::get('/usuarios', 'UserController@index');

@@ -1,42 +1,91 @@
 @extends('layouts.app')
 
 @section('content')
-
-<div class="card">
-    <div class="card-header">Dashboard</div>
-
-    <div class="card-body">
-        @if (session('status'))
-            <div class="alert alert-success" role="alert">
-                {{ session('status') }}
+<div class="panel-body">
+        @if(session('notification'))
+            <div class="alert alert-success">
+                {{ session('notification') }}
             </div>
         @endif
+  </div>
 
-        <table class="table table-bordered">
+    <div class="panel-body">
+        @if(count($errors) > 0)
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach($errors->all() as $error)
+                        <li> {{ $error }} </li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+  </div>
+<!-- DataTables -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css">
+<div class="container">
+        <table id="denuncias" class="table table-bordered table-striped">
             <thead>
                 <tr>
-                    <th>Apellido</th>
-                    <th>Nombres</th>
-                    <th>Documento</th>
-                    <th>Opciones</th>
+                    <th width="10px">ID</th>
+                    <th width="100px">Apellido</th>
+                    <th width="100px">Nombres</th>
+                    <th width="100px">Documento</th>
+                    <th width="102px">Opciones</th>
                 </tr>
             </thead>
-            <tbody>
-            @foreach($denuncias as $denuncia)
-                <tr>
-                    <td>{{ $denuncia->apellido }}</td>
-                    <td>{{ $denuncia->nombre }}</td>
-                    <td>{{ $denuncia->nro_documento }}</td>
-                    <td>
-                        <a href="denuncia/{{ $denuncia->id }}" class="btn btn-sm btn-primary">Editar</a>
-                        <a href="denuncia/{{ $denuncia->id }}/eliminar" class="btn btn-sm  btn-danger">Borrar</a>
-                    </td>
-                </tr>
-                @endforeach
-            </tbody>
+
         </table>
-
+      </div>
     </div>
-</div>
 
+<!-- DataTables -->
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
+<!-- Script DataTable -->
+<script>
+$(document).ready(function() {
+    $('#denuncias').DataTable({
+        "ServerSide": true,
+        "ajax": "{{ url('api/denuncias') }}",
+        "columns": [
+          {data: 'id'},
+          {data: 'apellido'},
+          {data: 'nombre'},
+          {data: 'nro_documento'},
+          {data: 'btn'},
+        ],
+
+        "language":{
+              "sProcessing":     "Procesando...",
+              "sLengthMenu":     "Mostrar _MENU_ registros",
+              "sZeroRecords":    "No se encontraron resultados",
+              "sEmptyTable":     "Ningún dato disponible en esta tabla =(",
+              "sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+              "sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0 registros",
+              "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
+              "sInfoPostFix":    "",
+              "sSearch":         "Buscar:",
+              "sUrl":            "",
+              "sInfoThousands":  ",",
+              "sLoadingRecords": "Cargando...",
+            },
+              "oPaginate": {
+                  "sFirst":    "Primero",
+                  "sLast":     "Último",
+                  "sNext":     "Siguiente",
+                  "sPrevious": "Anterior"
+              },
+              "oAria": {
+                  "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
+                  "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+              },
+              "buttons": {
+                  "copy": "Copiar",
+                  "colvis": "Visibilidad"
+              }
+        });
+});
+</script>
 @endsection

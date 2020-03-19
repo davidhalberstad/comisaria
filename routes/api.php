@@ -17,4 +17,12 @@ use Illuminate\Http\Request;
 //     return $request->user();
 // });
 
-Route::get('/proyecto/{id}/niveles', 'Admin\LevelController@byProject');    
+// Route::get('/proyecto/{id}/niveles', 'Admin\LevelController@byProject');
+
+Route::get('denuncias', function (){
+  return datatables()
+    ->eloquent(App\Denuncias::query())
+    ->addColumn('btn', 'actions')
+    ->rawColumns(['btn'])
+    ->toJson();
+});
