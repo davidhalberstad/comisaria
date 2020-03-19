@@ -18,7 +18,7 @@ Route::group(['middleware'=>'admin', 'namespace'=>'Admin'], function (){
 
 
     // Denuncias
-    Route::get('/denuncias', 'DenunciaController@index');
+    Route::get('/denuncias', 'DenunciaController@index')->name('denuncias');
     Route::post('/denuncias', 'DenunciaController@store');
 
     Route::get('/denuncia/{id}', 'DenunciaController@edit');
