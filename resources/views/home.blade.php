@@ -23,15 +23,16 @@
 <!-- DataTables -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css">
 <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css">
+
 <div class="container">
         <table id="denuncias" class="table table-bordered table-striped">
             <thead>
                 <tr>
-                    <th width="10px">ID</th>
-                    <th width="100px">Apellido</th>
-                    <th width="100px">Nombres</th>
-                    <th width="100px">Documento</th>
-                    <th width="102px">Opciones</th>
+                    <th width="10%">ID</th>
+                    <th width="20%">Apellido</th>
+                    <th width="20%">Nombres</th>
+                    <th width="20%">Documento</th>
+                    <th width="25%">Opciones</th>
                 </tr>
             </thead>
 
@@ -43,6 +44,10 @@
 <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
+
+
+
+
 <!-- Script DataTable -->
 <script>
 $(document).ready(function() {
