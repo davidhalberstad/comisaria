@@ -5,7 +5,7 @@
       <a href="#" class="nav-link active">
         <i class="nav-icon fas fa-tachometer-alt"></i>
         <p>
-          Modulo Calificador
+          Modulo Denuncias
           <i class="right fas fa-angle-left"></i>
         </p>
       </a>
@@ -16,12 +16,15 @@
             <p>Ver Denuncias</p>
           </a>
         </li>
+
+
         <li class="nav-item">
           <a href="{{ url('denuncias') }}" class="nav-link {{ ! Route::is('denuncias') ?: 'active' }}">
             <i class="far fa-circle nav-icon"></i>
             <p>Alta Denuncias</p>
           </a>
         </li>
+
       </ul>
     </li>
 
