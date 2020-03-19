@@ -11,53 +11,19 @@
       </a>
       <ul class="nav nav-treeview">
         <li class="nav-item">
-          <a href="admin" class="nav-link active">
+          <a href="{{ url('home') }}" class="nav-link {{ ! Route::is('home') ?: 'active' }}">
             <i class="far fa-circle nav-icon"></i>
-            <p>Ver Calificacion</p>
+            <p>Ver Denuncias</p>
           </a>
         </li>
         <li class="nav-item">
-          <a href="#" class="nav-link">
+          <a href="{{ url('denuncias') }}" class="nav-link {{ ! Route::is('denuncias') ?: 'active' }}">
             <i class="far fa-circle nav-icon"></i>
-            <p>Inactive Page</p>
+            <p>Alta Denuncias</p>
           </a>
         </li>
       </ul>
     </li>
 
-    <!-- Panel de Control de RRHH -->
-    <li class="nav-item has-treeview menu-open">
-      <a href="#" class="nav-link active">
-        <i class="nav-icon fas fa-tachometer-alt"></i>
-        <p>
-          Modulo de RRHH
-          <i class="right fas fa-angle-left"></i>
-        </p>
-      </a>
-      <ul class="nav nav-treeview">
-        <li class="nav-item">
-          <a href="admin" class="nav-link active">
-            <i class="far fa-circle nav-icon"></i>
-            <p>Ver Calificacion</p>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a href="#" class="nav-link">
-            <i class="far fa-circle nav-icon"></i>
-            <p>Inactive Page</p>
-          </a>
-        </li>
-      </ul>
-    </li>
-
-    <li class="nav-item">
-      <a href="#" class="nav-link">
-        <i class="nav-icon fas fa-th"></i>
-        <p>
-          Simple Link
-          <span class="right badge badge-danger">New</span>
-        </p>
-      </a>
-    </li>
   </ul>
 </nav>
