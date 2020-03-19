@@ -145,7 +145,7 @@
             </div>
         </form>
 
-        <table class="table table-bordered">
+        <table id='denuncias' class="table table-bordered">
             <thead>
                 <tr>
                     <th>Apellido</th>
@@ -171,4 +171,11 @@
 
     </div>
 </div>
+
+<!-- Script DataTable -->
+<script>
+$(document).ready(function() {
+    $('#denuncias').DataTable();
+} );
+</script>
 @endsection
