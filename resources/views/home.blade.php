@@ -54,7 +54,7 @@
 <script>
 $(document).ready(function() {
     $('#denuncias').DataTable({
-
+        // Ajax donde trae la informacion de la tabla
         "ServerSide": true,
         "ajax": "{{ url('api/denuncias') }}",
         "columns": [
@@ -64,7 +64,7 @@ $(document).ready(function() {
           {data: 'nro_documento'},
           {data: 'btn'},
         ],
-
+        // Lenguaje en Castellano de la tabla
         "language":{
               "sProcessing":     "Procesando...",
               "sLengthMenu":     "Mostrar _MENU_ registros",
@@ -93,8 +93,6 @@ $(document).ready(function() {
                   "copy": "Copiar",
                   "colvis": "Visibilidad"
               },
-
-
         });
 });
 </script>
