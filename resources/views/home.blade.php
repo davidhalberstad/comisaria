@@ -24,8 +24,11 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css">
 <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css">
 
-<div class="container">
-        <table id="denuncias" class="table table-bordered table-striped">
+
+
+<div class="row">
+      <div class="container">
+        <table id="denuncias" class="table table-bordered table-striped" >
             <thead>
                 <tr>
                     <th width="10%">ID</th>
@@ -38,7 +41,7 @@
 
         </table>
       </div>
-    </div>
+</div>
 
 <!-- DataTables -->
 <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
@@ -47,11 +50,11 @@
 
 
 
-
 <!-- Script DataTable -->
 <script>
 $(document).ready(function() {
     $('#denuncias').DataTable({
+
         "ServerSide": true,
         "ajax": "{{ url('api/denuncias') }}",
         "columns": [
@@ -89,7 +92,9 @@ $(document).ready(function() {
               "buttons": {
                   "copy": "Copiar",
                   "colvis": "Visibilidad"
-              }
+              },
+
+
         });
 });
 </script>
