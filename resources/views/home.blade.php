@@ -35,6 +35,8 @@
                     <th width="20%">Apellido</th>
                     <th width="20%">Nombres</th>
                     <th width="20%">Documento</th>
+                    <th width="20%">Fecha</th>
+                    <th width="20%">Hecho</th>
                     <th width="25%">Opciones</th>
                 </tr>
             </thead>
@@ -62,6 +64,8 @@ $(document).ready(function() {
           {data: 'apellido'},
           {data: 'nombre'},
           {data: 'nro_documento'},
+          {data: 'fecha_denuncia'},
+          {data: 'tipo_hecho'},
           {data: 'btn'},
         ],
         // Lenguaje en Castellano de la tabla
