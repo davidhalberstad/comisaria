@@ -19,6 +19,7 @@ use Illuminate\Http\Request;
 
 // Route::get('/proyecto/{id}/niveles', 'Admin\LevelController@byProject');
 
+//Extraer los datos de la Base de Datos para armar el DataTable
 Route::get('denuncias', function (){
   return datatables()
     ->eloquent(App\Denuncias::query())
