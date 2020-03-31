@@ -73,7 +73,7 @@ class DenunciaController extends Controller
 //Edit
     public function edit($id)
     {
-        $denuncia = Denuncias::find($id);
+        $denuncia = Denuncias::findOrFail($id);
         $localidades = Localidad::all();
 
         return view('admin.denuncias.edit')->with(compact('denuncia', 'localidades'));
@@ -97,7 +97,7 @@ class DenunciaController extends Controller
 
         $this->validate($request, $rules, $messages);
 
-        $denuncia = Denuncias::find($id);
+        $denuncia = Denuncias::findOrFail($id);
 
         $denuncia->apellido = $request->input('apellido');
         $denuncia->nombre = $request->input('nombre');
