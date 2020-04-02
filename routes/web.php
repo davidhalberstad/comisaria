@@ -4,6 +4,9 @@ Route::get('/', function () {
     return view('auth.login');
 });
 
+Route::get('/welcome', function () {
+    return view('welcome');
+});
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
@@ -12,6 +15,8 @@ Route::get('/reportar', 'HomeController@getReport');
 
 Route::post('/reportar', 'HomeController@postReport');
 
+Route::Get('productByCategory/{id}', 'DenunciaController@byCategory');
+//como pasamos la variable correspondiente al id de la categoría como parámetro en la url en la ruta lo recibimos como parámetro
 
 
 Route::group(['middleware'=>'admin', 'namespace'=>'Admin'], function (){
@@ -28,6 +33,10 @@ Route::group(['middleware'=>'admin', 'namespace'=>'Admin'], function (){
 
 
   Route::resource('/denuncia', 'DenunciaController');
+
+  Route::Get('productByCategory/{id}', 'DenunciaController@byCategory');
+  //como pasamos la variable correspondiente al id de la categoría como parámetro en la url en la ruta lo recibimos como parámetro
+
 
     // // Users
     // Route::get('/usuarios', 'UserController@index');
