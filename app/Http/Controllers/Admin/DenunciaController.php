@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+
 use App\Denuncias;
+use App\PreventivoJudicial;
 use App\Localidad;
 use App\TipoInculpado;
 use App\TipoSexo;
@@ -16,6 +18,8 @@ use App\Juzgado;
 use App\Hecho;
 use App\ModusOperandy;
 use App\OrigenInstruccion;
+use App\TipoVinculoImputadoVictima;
+use App\TipoSemaforo;
 
 class DenunciaController extends Controller
 {
@@ -58,25 +62,25 @@ class DenunciaController extends Controller
         $denuncia->telefono_celular = $request->input('telefono_celular');
         $denuncia->correo_electronico = $request->input('correo_electronico');
         $denuncia->damnificado_testigo = $request->input('damnificado_testigo');
-        $denuncia->nro_documento = $request->input('nro_documento');
         $denuncia->fecha_denuncia = $request->input('fecha_denuncia');
         $denuncia->hora_denuncia = $request->input('hora_denuncia');
         $denuncia->ubicacion = $request->input('ubicacion');
         $denuncia->localidad = $request->input('localidad');
         $denuncia->tipo_hecho = $request->input('tipo_hecho');
-        $denuncia->relato = $request->input('relato');
         $denuncia->direccion_gps = $request->input('direccion_gps');
         $denuncia->relato = $request->input('relato');
         $denuncia->latitud = $request->input('latitud');
         $denuncia->longitud = $request->input('longitud');
         $denuncia->estado = 0;
 
-        // Denuncia Completa Dependencia
-
-
         $denuncia->save();
 
-        // dd($request->all());
+        // Denuncia Completa Dependencia
+        $preventivo_judicial = new PreventivoJudicial();
+
+        $preventivo_judicial->save();
+
+
 
         return back()->with('notification', 'Guardado Exitosamente!!!');
     }
@@ -88,7 +92,7 @@ class DenunciaController extends Controller
         $denuncia = Denuncias::findOrFail($id);
         $localidades = Localidad::all();
         $tipo_inculpado = TipoInculpado::orderBy('tipo', 'ASC')->get();
-        $sexo_inculpado = TipoSexo::orderBy('tipo', 'ASC')->get();
+        $sexo = TipoSexo::orderBy('tipo', 'ASC')->get();
         $tipo_rango_edad = TipoRangoEdad::orderBy('tipo', 'ASC')->get();
         $tipo_lugar_hecho = TipoLugarHecho::orderBy('tipo_lugar_hecho', 'ASC')->get();
         $tipo_via = TipoVia::orderBy('tipo', 'ASC')->get();
@@ -96,8 +100,11 @@ class DenunciaController extends Controller
         $hechos = Hecho::orderBy('delito', 'ASC')->get();
         $modusoperandys = ModusOperandy::orderBy('modus_operandi', 'ASC')->get();
         $origen_instruccions = OrigenInstruccion::orderBy('tipo', 'ASC')->get();
+        $tipo_vinculo_imputado_victima = TipoVinculoImputadoVictima::orderBy('id', 'ASC')->get();
+        $tipo_semaforo = TipoSemaforo::orderBy('id', 'ASC')->get();
 
-        return view('admin.denuncias.edit')->with(compact('denuncia', 'localidades', 'tipo_inculpado', 'sexo_inculpado', 'tipo_rango_edad', 'tipo_lugar_hecho', 'tipo_via', 'categorias', 'hechos', 'modusoperandys', 'origen_instruccions'));
+
+        return view('admin.denuncias.edit')->with(compact('denuncia', 'localidades', 'tipo_inculpado', 'sexo', 'tipo_rango_edad', 'tipo_lugar_hecho', 'tipo_via', 'categorias', 'hechos', 'modusoperandys', 'origen_instruccions', 'tipo_vinculo_imputado_victima', 'tipo_semaforo'));
     }
 
 //Update
@@ -131,13 +138,11 @@ class DenunciaController extends Controller
         $denuncia->telefono_celular = $request->input('telefono_celular');
         $denuncia->correo_electronico = $request->input('correo_electronico');
         $denuncia->damnificado_testigo = $request->input('damnificado_testigo');
-        $denuncia->nro_documento = $request->input('nro_documento');
         $denuncia->fecha_denuncia = $request->input('fecha_denuncia');
         $denuncia->hora_denuncia = $request->input('hora_denuncia');
         $denuncia->ubicacion = $request->input('ubicacion');
         $denuncia->localidad = $request->input('localidad');
         $denuncia->tipo_hecho = $request->input('tipo_hecho');
-        $denuncia->relato = $request->input('relato');
         $denuncia->direccion_gps = $request->input('direccion_gps');
         $denuncia->relato = $request->input('relato');
         $denuncia->latitud = $request->input('latitud');
@@ -158,14 +163,5 @@ class DenunciaController extends Controller
         return back()->with('notification', 'Eliminado Exitosamente!!!');
     }
 
-    public function byCategory($id){
-
-    	// return Juzgado::where('relacion','=',$id)->get();
-      $juzgado = Juzgado::where('relacion','=',$id)->get();
-dd($juzgado);
-     return $juzgado;
-
-
-    }
 
 }
