@@ -6,6 +6,16 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Denuncias;
 use App\Localidad;
+use App\TipoInculpado;
+use App\TipoSexo;
+use App\TipoRangoEdad;
+use App\TipoLugarHecho;
+use App\TipoVia;
+use App\Circunscripcion;
+use App\Juzgado;
+use App\Hecho;
+use App\ModusOperandy;
+use App\OrigenInstruccion;
 
 class DenunciaController extends Controller
 {
@@ -15,6 +25,7 @@ class DenunciaController extends Controller
     {
         $denuncias = Denuncias::all();
         $localidades = Localidad::orderBy('municipio', 'ASC')->get();
+
 
        return view('admin.denuncias.index')->with(compact('denuncias', 'localidades'));
     }
@@ -73,10 +84,20 @@ class DenunciaController extends Controller
 //Edit
     public function edit($id)
     {
+
         $denuncia = Denuncias::findOrFail($id);
         $localidades = Localidad::all();
+        $tipo_inculpado = TipoInculpado::orderBy('tipo', 'ASC')->get();
+        $sexo_inculpado = TipoSexo::orderBy('tipo', 'ASC')->get();
+        $tipo_rango_edad = TipoRangoEdad::orderBy('tipo', 'ASC')->get();
+        $tipo_lugar_hecho = TipoLugarHecho::orderBy('tipo_lugar_hecho', 'ASC')->get();
+        $tipo_via = TipoVia::orderBy('tipo', 'ASC')->get();
+        $categorias = Circunscripcion::orderBy('opcion', 'ASC')->get();
+        $hechos = Hecho::orderBy('delito', 'ASC')->get();
+        $modusoperandys = ModusOperandy::orderBy('modus_operandi', 'ASC')->get();
+        $origen_instruccions = OrigenInstruccion::orderBy('tipo', 'ASC')->get();
 
-        return view('admin.denuncias.edit')->with(compact('denuncia', 'localidades'));
+        return view('admin.denuncias.edit')->with(compact('denuncia', 'localidades', 'tipo_inculpado', 'sexo_inculpado', 'tipo_rango_edad', 'tipo_lugar_hecho', 'tipo_via', 'categorias', 'hechos', 'modusoperandys', 'origen_instruccions'));
     }
 
 //Update
@@ -135,6 +156,16 @@ class DenunciaController extends Controller
         $denuncia->delete();
 
         return back()->with('notification', 'Eliminado Exitosamente!!!');
+    }
+
+    public function byCategory($id){
+
+    	// return Juzgado::where('relacion','=',$id)->get();
+      $juzgado = Juzgado::where('relacion','=',$id)->get();
+dd($juzgado);
+     return $juzgado;
+
+
     }
 
 }

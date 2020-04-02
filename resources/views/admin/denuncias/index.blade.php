@@ -40,7 +40,7 @@
               </div>
 
               <div class="form-group">
-                <label for="tipo_dni">Tipo DNI  </label>
+                <label for="tipo_dni">Tipo Documento  </label>
                     <input type="text" name="tipo_dni" class="form-control" value="{{ old('tipo_dni') }}">
               </div>
 
@@ -101,7 +101,8 @@
 
               <div class="form-group">
                   <label for="localidad">Localidad  </label>
-                    <select name="localidad" class="form-control">
+                    <select name="localidad" class="form-control" required >
+                       <option selected value="">Seleccionar</option>
                       @foreach( $localidades as $category )
                        <option value="{{ $category->id }}">{{ $category->municipio }}</option>
                       @endforeach

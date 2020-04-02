@@ -41,7 +41,7 @@
             </div>
 
             <div class="form-group">
-              <label for="tipo_dni">Tipo DNI  </label>
+              <label for="tipo_dni">Tipo Documento  </label>
                   <input type="text" name="tipo_dni" class="form-control" value="{{ $denuncia->tipo_dni }}">
             </div>
 
@@ -104,7 +104,6 @@
                 <label for="localidad">Localidad  </label>
                   <select name="localidad" class="form-control">
                     @foreach( $localidades as $category )
-                     <!-- <option value="{{ $category->id }}">{{ $category->municipio }}</option> -->
                      <option value="{{ $category->id }}" @if($denuncia->localidad=== $category->id) selected='selected' @endif>{{ $category->municipio }}</option>
                     @endforeach
                   </select>
@@ -120,7 +119,7 @@
               <textarea name="relato" id="relato" rows="5" cols="128">{{ $denuncia->relato }}</textarea>
             </div>
 
-            <div class="form-group">
+            <!-- <div class="form-group">
               <label for="direccion_gps">Direccion GPS  </label>
                   <input type="text" name="direccion_gps" class="form-control" value="{{ $denuncia->direccion_gps }}">
             </div>
@@ -138,13 +137,136 @@
             <div class="form-group">
               <label for="estado">Estado  </label>
                   <input type="text" name="estado" class="form-control" value="{{ $denuncia->estado }}">
+            </div> -->
+
+<!-- Comienza la carga de complementacion de la denuncia -->
+<hr>  </hr>
+            <div class="form-group">
+                <label for="localidad">Tipo Inculpado  </label>
+                  <select name="localidad" class="form-control">
+                    @foreach( $tipo_inculpado as $category )
+                     <option value="{{ $category->tipo }}">{{ $category->tipo }}</option>
+                    @endforeach
+                  </select>
             </div>
 
+            <div class="form-group">
+                <label for="sexo_inculpado">Sexo Inculpado  </label>
+                  <select name="sexo_inculpado" class="form-control" required >
+                    <option selected value="NO CONSTA">NO CONSTA</option>
+                    @foreach( $sexo_inculpado as $category )
+                     <option value="{{ $category->tipo }}">{{ $category->tipo }}</option>
+                    @endforeach
+                  </select>
+            </div>
 
+            <div class="form-group">
+                <label for="edad_inculpado">Edad Inculpado  </label>
+                  <select name="edad_inculpado" class="form-control" required >
+                    <option selected value="NO CONSTA">NO CONSTA</option>
+                    @foreach( $tipo_rango_edad as $category )
+                     <option value="{{ $category->tipo }}">{{ $category->tipo }}</option>
+                    @endforeach
+                  </select>
+            </div>
 
+            <div class="form-group">
+                <label for="tipo_lugar_hecho">Lugar del Hecho </label>
+                  <select name="tipo_lugar_hecho" class="form-control" required >
+                    <option selected value="">Seleccionar</option>
+                    @foreach( $tipo_lugar_hecho as $category )
+                     <option value="{{ $category->tipo_lugar_hecho }}">{{ $category->tipo_lugar_hecho }}</option>
+                    @endforeach
+                  </select>
+            </div>
+
+            <div class="form-group">
+                <label for="tipo_via">Lugar de Via </label>
+                  <select name="tipo_via" class="form-control" required >
+                    <option selected value="">Seleccionar</option>
+                    @foreach( $tipo_via as $category )
+                     <option value="{{ $category->tipo }}">{{ $category->tipo }}</option>
+                    @endforeach
+                  </select>
+            </div>
+
+            <div class="form-group">
+              <label for="calle">Calle  </label>
+                  <input type="text" name="calle" class="form-control" value="{{ $denuncia->calle }}">
+            </div>
+
+            <div class="form-group">
+              <label for="altura">Altura  </label>
+                  <input type="text" name="altura" class="form-control" value="{{ $denuncia->altura }}">
+            </div>
+
+            <div class="form-group">
+              <label for="interserccion">Intersección  </label>
+                  <input type="text" name="interseccion" class="form-control" value="{{ $denuncia->interseccion }}">
+            </div>
+
+            <div class="form-group">
+              <label for="casa_nro">Casa Nro.  </label>
+                  <input type="text" name="casa_nro" class="form-control" value="{{ $denuncia->casa_nro }}">
+            </div>
+
+            <!-- Select Padre -->
+            <div class="form-group">
+               <label for="" class="control-label">Seleccione Circunscripcion Judicial</label>
+                  <select name="categorias" id="categorias" class="form-control">
+                     <option value="">Seleccione</option>
+                     @foreach ($categorias as $categoria)
+                        <option value="{{ $categoria->id }}">{{ $categoria->opcion }}</option>
+                     @endforeach
+                  </select>
+            </div>
+
+            <!-- Select Hijo Nivel 1 -->
+            <div class="form-group">
+               <label for="" class="control-label">Seleccione Juzgado</label>
+                  <select name="productos" id="productos" class="form-control">
+
+                       <option value="">Seleccione</option>
+                   </select>
+            </div>
+
+            <div class="form-group">
+               <label for="hechos" class="control-label">Hecho</label>
+                  <select name="hechos" class="form-control" required >
+                     <option value="">Seleccione</option>
+                     @foreach ($hechos as $item)
+                        <option value="{{ $item->id }}">{{ $item->delito }}</option>
+                     @endforeach
+                  </select>
+            </div>
+
+            <div class="form-group">
+               <label for="modus_operandi" class="control-label">Modus Operandi</label>
+                  <select name="modus_operandi" class="form-control" required >
+                     <option value="">Seleccione</option>
+                     @foreach ($modusoperandys as $item)
+                        <option value="{{ $item->id }}">{{ $item->modus_operandi }}</option>
+                     @endforeach
+                  </select>
+            </div>
+
+            <div class="form-group">
+               <label for="motivo_origina_instruccion_causa" class="control-label">
+MOTIVO QUE ORIGINA LA INSTR. DE LA CAUSA</label>
+                  <select name="motivo_origina_instruccion_causa" class="form-control" required>
+                     <option value="">Seleccione</option>
+                     @foreach ($origen_instruccions as $item)
+                        <option value="{{ $item->id }}">{{ $item->tipo }}</option>
+                     @endforeach
+                  </select>
+            </div>
+
+          
+            <!-- Boton Modificar -->
             <div class="form-group">
                 <button class="btn btn-primary">Modificar</button>
             </div>
+
         </form>
 
 
@@ -157,4 +279,24 @@
 
 @section('scripts')
     <script src="/js/admin/denuncias/edit.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ajaxy/1.6.1/scripts/jquery.ajaxy.min.js"></script>
+    <script>
+    $(document).ready(function(){
+    $("#categorias").change(function(){
+      var categoria = $(this).val();
+
+      $.get('/productByCategory/'+categoria, function(data){
+//esta el la peticion get, la cual se divide en tres partes. ruta,variables y funcion
+        console.log(data);
+          var producto_select = '<option value="">Seleccione Porducto</option>'
+            for (var i=0; i<data.length;i++)
+              producto_select+='<option value="'+data[i].id+'">'+data[i].opcion+'</option>';
+
+            $("#productos").html(producto_select);
+
+      });
+    });
+  });
+    </script>
 @endsection
