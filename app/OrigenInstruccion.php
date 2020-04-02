@@ -9,7 +9,7 @@ class OrigenInstruccion extends Model
       protected $table = 'tipo_origen_causa';
 
       protected $fillable = [
-        'id', 'tipo',
+        'id', 'tipo'
       ];
 
 }

@@ -9,7 +9,7 @@ class ModusOperandy extends Model
       protected $table = 'modus_operandi';
 
       protected $fillable = [
-        'id', 'modus_operandi',
+        'id', 'modus_operandi'
       ];
 
 }

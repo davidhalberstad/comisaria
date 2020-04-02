@@ -9,7 +9,7 @@ class Localidad extends Model
       protected $table = 'misiones';
 
       protected $fillable = [
-          'municipio', 'departamento', 'poblacion', 'mujeres', 'varones', 'zona', 'id', 
+          'municipio', 'departamento', 'poblacion', 'mujeres', 'varones', 'zona', 'id'
       ];
 
 }

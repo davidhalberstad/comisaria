@@ -9,7 +9,7 @@ class Juzgado extends Model
       protected $table = 'select_2';
 
       protected $fillable = [
-          'id', 'opcion', 'relacion',
+          'id', 'opcion', 'relacion'
       ];
 
 }
