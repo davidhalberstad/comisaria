@@ -20,6 +20,16 @@ use App\ModusOperandy;
 use App\OrigenInstruccion;
 use App\TipoVinculoImputadoVictima;
 use App\TipoSemaforo;
+use App\TipoModoSiniestroVial;
+use App\TipoCondicionClimatica;
+use App\TipoClaseVictimaVial;
+use App\TipoVehiculoVictima;
+use App\TipoArma;
+use App\TipoOcasionHomicidio;
+use App\TipoPersona;
+use App\TipoSuicidio;
+use App\TipoSiNo;
+
 
 class DenunciaController extends Controller
 {
@@ -78,6 +88,8 @@ class DenunciaController extends Controller
         // Denuncia Completa Dependencia
         $preventivo_judicial = new PreventivoJudicial();
 
+        $preventivo_judicial->inculpado = $request->input('inculpado');
+
         $preventivo_judicial->save();
 
 
@@ -100,11 +112,20 @@ class DenunciaController extends Controller
         $hechos = Hecho::orderBy('delito', 'ASC')->get();
         $modusoperandys = ModusOperandy::orderBy('modus_operandi', 'ASC')->get();
         $origen_instruccions = OrigenInstruccion::orderBy('tipo', 'ASC')->get();
-        $tipo_vinculo_imputado_victima = TipoVinculoImputadoVictima::orderBy('id', 'ASC')->get();
+        $tipo_vinculo = TipoVinculoImputadoVictima::orderBy('id', 'ASC')->get();
         $tipo_semaforo = TipoSemaforo::orderBy('id', 'ASC')->get();
+        $tipo_muerte_vial = TipoModoSiniestroVial::orderBy('id', 'ASC')->get();
+        $tipo_condicion_climatica = TipoCondicionClimatica::orderBy('id', 'ASC')->get();
+        $tipo_clase_victima_vial = TipoClaseVictimaVial::orderBy('id', 'ASC')->get();
+        $tipo_vehiculo_victima = TipoVehiculoVictima::orderBy('id', 'ASC')->get();
+        $tipo_arma = TipoArma::orderBy('id', 'ASC')->get();
+        $tipo_ocasion_homicidio = TipoOcasionHomicidio::orderBy('id', 'ASC')->get();
+        $tipo_persona = TipoPersona::orderBy('id', 'ASC')->get();
+        $tipo_suicidio = TipoSuicidio::orderBy('id', 'ASC')->get();
+        $tipo_si_no = TipoSiNo::orderBy('id', 'ASC')->get();
 
 
-        return view('admin.denuncias.edit')->with(compact('denuncia', 'localidades', 'tipo_inculpado', 'sexo', 'tipo_rango_edad', 'tipo_lugar_hecho', 'tipo_via', 'categorias', 'hechos', 'modusoperandys', 'origen_instruccions', 'tipo_vinculo_imputado_victima', 'tipo_semaforo'));
+        return view('admin.denuncias.edit')->with(compact('denuncia', 'localidades', 'tipo_inculpado', 'sexo', 'tipo_rango_edad', 'tipo_lugar_hecho', 'tipo_via', 'categorias', 'hechos', 'modusoperandys', 'origen_instruccions', 'tipo_vinculo', 'tipo_semaforo', 'tipo_muerte_vial', 'tipo_condicion_climatica', 'tipo_clase_victima_vial', 'tipo_vehiculo_victima', 'tipo_arma', 'tipo_ocasion_homicidio', 'tipo_persona', 'tipo_suicidio', 'tipo_si_no'));
     }
 
 //Update
@@ -150,6 +171,14 @@ class DenunciaController extends Controller
         $denuncia->estado = 0;
 
         $denuncia->save();
+
+        // Denuncia Completa Dependencia
+        $preventivo_judicial = new PreventivoJudicial();
+
+        $preventivo_judicial->inculpado = $request->input('inculpado');
+
+        $preventivo_judicial->save();
+
 
         return back()->with('notification', 'Modificado Exitosamente!!!');
     }
