@@ -231,11 +231,11 @@
               </div>
 
               <div class="form-group">
-                  <label for="hechos" class="control-label">Hecho</label>
-                  <select name="hechos" class="form-control" required>
+                  <label for="hecho" class="control-label">Hecho</label>
+                  <select name="hecho" class="form-control" required>
                       <option value="">Seleccione</option>
                       @foreach ($hechos as $item)
-                      <option value="{{ $item->id }}">{{ $item->delito }}</option>
+                      <option value="{{ $item->delito }}">{{ $item->delito }}</option>
                       @endforeach
                   </select>
               </div>
@@ -274,7 +274,7 @@
                   <label for="vinculo_imputado_victima" class="control-label">VINCULO INCULPADO CON LA VICTIMA</label>
                   <select name="vinculo_imputado_victima" class="form-control" required>
                       <option selected value="">Seleccione</option>
-                      @foreach ($tipo_vinculo_imputado_victima as $item)
+                      @foreach ($tipo_vinculo as $item)
                       <option value="{{ $item->tipo }}">{{ $item->tipo }}</option>
                       @endforeach
                   </select>
@@ -297,30 +297,40 @@
               </div>
 
               <div class="form-group">
-                  <label for="semaforo_muerte_vial" class="control-label">SEMAFORO</label>
-                  <select name="semaforo_muerte_vial" class="form-control" required>
+                  <label for="modo_muerte_vial" class="control-label">MODO</label>
+                  <select name="modo_muerte_vial" class="form-control" required>
                       <option selected value="">Seleccione</option>
-                      @foreach ($tipo_semaforo as $item)
+                      @foreach ($tipo_muerte_vial as $item)
                       <option value="{{ $item->tipo }}">{{ $item->tipo }}</option>
                       @endforeach
                   </select>
               </div>
 
               <div class="form-group">
-                  <label for="semaforo_muerte_vial" class="control-label">SEMAFORO</label>
-                  <select name="semaforo_muerte_vial" class="form-control" required>
+                  <label for="condicion_climatica_muerte_vial" class="control-label">CONDICION CLIMATICA</label>
+                  <select name="condicion_climatica_muerte_vial" class="form-control" required>
                       <option selected value="">Seleccione</option>
-                      @foreach ($tipo_semaforo as $item)
+                      @foreach ($tipo_condicion_climatica as $item)
                       <option value="{{ $item->tipo }}">{{ $item->tipo }}</option>
                       @endforeach
                   </select>
               </div>
 
               <div class="form-group">
-                  <label for="semaforo_muerte_vial" class="control-label">SEMAFORO</label>
-                  <select name="semaforo_muerte_vial" class="form-control" required>
+                  <label for="clase_victima_muerte_vial" class="control-label">CLASE VICTIMA</label>
+                  <select name="clase_victima_muerte_vial" class="form-control" required>
                       <option selected value="">Seleccione</option>
-                      @foreach ($tipo_semaforo as $item)
+                      @foreach ($tipo_clase_victima_vial as $item)
+                      <option value="{{ $item->tipo }}">{{ $item->tipo }}</option>
+                      @endforeach
+                  </select>
+              </div>
+
+              <div class="form-group">
+                  <label for="vehiculo_victima_muerte_vial" class="control-label">VEHICULO VICTIMA</label>
+                  <select name="vehiculo_victima_muerte_vial" class="form-control" required>
+                      <option selected value="">Seleccione</option>
+                      @foreach ($tipo_vehiculo_victima as $item)
                       <option value="{{ $item->tipo }}">{{ $item->tipo }}</option>
                       @endforeach
                   </select>
@@ -333,40 +343,51 @@
               </div>
 
               <div class="form-group">
-                  <label for="semaforo_muerte_vial" class="control-label">SEMAFORO</label>
-                  <select name="semaforo_muerte_vial" class="form-control" required>
+                  <label for="arma_utilizada_homicidos_dolosos" class="control-label">ARMA UTILIZADA</label>
+                  <select name="arma_utilizada_homicidos_dolosos" class="form-control" required>
                       <option selected value="">Seleccione</option>
-                      @foreach ($tipo_semaforo as $item)
+                      @foreach ($tipo_arma as $item)
                       <option value="{{ $item->tipo }}">{{ $item->tipo }}</option>
                       @endforeach
                   </select>
               </div>
 
               <div class="form-group">
-                  <label for="semaforo_muerte_vial" class="control-label">SEMAFORO</label>
-                  <select name="semaforo_muerte_vial" class="form-control" required>
+                  <label for="ocasion_delito_homicidos_dolosos" class="control-label">OCASION</label>
+                  <select name="ocasion_delito_homicidos_dolosos" class="form-control" required>
                       <option selected value="">Seleccione</option>
-                      @foreach ($tipo_semaforo as $item)
+                      @foreach ($tipo_ocasion_homicidio as $item)
                       <option value="{{ $item->tipo }}">{{ $item->tipo }}</option>
                       @endforeach
                   </select>
               </div>
 
               <div class="form-group">
-                  <label for="semaforo_muerte_vial" class="control-label">SEMAFORO</label>
-                  <select name="semaforo_muerte_vial" class="form-control" required>
+                  <label for="sexo_homicidos_dolosos" class="control-label">SEXO</label>
+                  <select name="sexo_homicidos_dolosos" class="form-control" required>
                       <option selected value="">Seleccione</option>
-                      @foreach ($tipo_semaforo as $item)
+                      <option value="99 - SIN DETERMINACION">99 - SIN DETERMINACION</option>
+                      @foreach ($sexo as $item)
                       <option value="{{ $item->tipo }}">{{ $item->tipo }}</option>
                       @endforeach
                   </select>
               </div>
 
               <div class="form-group">
-                  <label for="semaforo_muerte_vial" class="control-label">SEMAFORO</label>
-                  <select name="semaforo_muerte_vial" class="form-control" required>
+                  <label for="clase_victima_homicidos_dolosos" class="control-label">CLASE VICTIMA</label>
+                  <select name="clase_victima_homicidos_dolosos" class="form-control" required>
                       <option selected value="">Seleccione</option>
-                      @foreach ($tipo_semaforo as $item)
+                      @foreach ($tipo_persona as $item)
+                      <option value="{{ $item->tipo }}">{{ $item->tipo }}</option>
+                      @endforeach
+                  </select>
+              </div>
+
+              <div class="form-group">
+                  <label for="vinculo_imputado_con_victima_homicidos_dolosos" class="control-label">VINCULO DEL INCULPADO CON LA VICTIMA</label>
+                  <select name="vinculo_imputado_con_victima_homicidos_dolosos" class="form-control" required>
+                      <option selected value="">Seleccione</option>
+                      @foreach ($tipo_vinculo as $item)
                       <option value="{{ $item->tipo }}">{{ $item->tipo }}</option>
                       @endforeach
                   </select>
@@ -379,43 +400,45 @@
               </div>
 
               <div class="form-group">
-                  <label for="semaforo_muerte_vial" class="control-label">SEMAFORO</label>
-                  <select name="semaforo_muerte_vial" class="form-control" required>
+                  <label for="modalidad_suicidios" class="control-label">MODALIDAD DEL SUICIDIO</label>
+                  <select name="modalidad_suicidios" class="form-control" required>
                       <option selected value="">Seleccione</option>
-                      @foreach ($tipo_semaforo as $item)
+                      @foreach ($tipo_suicidio as $item)
                       <option value="{{ $item->tipo }}">{{ $item->tipo }}</option>
                       @endforeach
                   </select>
               </div>
 
               <div class="form-group">
-                  <label for="semaforo_muerte_vial" class="control-label">SEMAFORO</label>
-                  <select name="semaforo_muerte_vial" class="form-control" required>
+                  <label for="sexo_suicida_suicidios" class="control-label">SEXO DEL SUICIDA</label>
+                  <select name="sexo_suicida_suicidios" class="form-control" required>
                       <option selected value="">Seleccione</option>
-                      @foreach ($tipo_semaforo as $item)
+                      <option value="99 - SIN DETERMINAR">99 - SIN DETERMINAR</option>
+                      @foreach ($sexo as $item)
                       <option value="{{ $item->tipo }}">{{ $item->tipo }}</option>
                       @endforeach
                   </select>
               </div>
 
               <div class="form-group">
-                  <label for="semaforo_muerte_vial" class="control-label">SEMAFORO</label>
-                  <select name="semaforo_muerte_vial" class="form-control" required>
+                  <label for="edad_suicida">EDAD SUICIDA </label>
+                  <input type="number" name="edad_suicida" class="form-control" value="{{ $denuncia->edad_suicida }}">
+              </div>
+
+              <div class="form-group">
+                  <label for="sexo_testigo_suicidios" class="control-label">SEXO TESTIGO</label>
+                  <select name="sexo_testigo_suicidios" class="form-control" required>
                       <option selected value="">Seleccione</option>
-                      @foreach ($tipo_semaforo as $item)
+                      <option value="99 - SIN DETERMINAR">99 - SIN DETERMINAR</option>
+                      @foreach ($sexo as $item)
                       <option value="{{ $item->tipo }}">{{ $item->tipo }}</option>
                       @endforeach
                   </select>
               </div>
 
               <div class="form-group">
-                  <label for="semaforo_muerte_vial" class="control-label">SEMAFORO</label>
-                  <select name="semaforo_muerte_vial" class="form-control" required>
-                      <option selected value="">Seleccione</option>
-                      @foreach ($tipo_semaforo as $item)
-                      <option value="{{ $item->tipo }}">{{ $item->tipo }}</option>
-                      @endforeach
-                  </select>
+                  <label for="edad_testigo_suicidios">EDAD TESTIGO </label>
+                  <input type="number" name="edad_testigo_suicidios" class="form-control" value="{{ $denuncia->edad_suicida }}">
               </div>
 
               <!-- Comienza la carga de complementacion de la denuncia: Cargar solo en caso de HURTO DE MOTICICLETA O AUTOMOTOR -->
@@ -425,48 +448,93 @@
               </div>
 
               <div class="form-group">
-                  <label for="semaforo_muerte_vial" class="control-label">SEMAFORO</label>
-                  <select name="semaforo_muerte_vial" class="form-control" required>
+                  <label for="letra">LETRA DOMINIO</label>
+                  <input type="text" name="letra" class="form-control" value="{{ $denuncia->letra }}">
+              </div>
+
+              <div class="form-group">
+                  <label for="nro">NRO DOMINO</label>
+                  <input type="text" name="nro" class="form-control" value="{{ $denuncia->nro }}">
+              </div>
+
+              <div class="form-group">
+                  <label for="marca">MARCA Y MODELO</label>
+                  <input type="text" name="marca" class="form-control" value="{{ $denuncia->marca }}">
+              </div>
+
+              <div class="form-group">
+                  <label for="motor">NRO MOTOR</label>
+                  <input type="text" name="motor" class="form-control" value="{{ $denuncia->motor }}">
+              </div>
+
+              <div class="form-group">
+                  <label for="chasis">NRO CHASIS O CUADRO</label>
+                  <input type="text" name="chasis" class="form-control" value="{{ $denuncia->chasis }}">
+              </div>
+
+              <!-- Comienza la carga de complementacion de la denuncia: Esclarecido y Detenidos -->
+              <hr> </hr>
+              <div class="form-group">
+                  <h3>*ESCLARECIMIENTO Y DETENIDOS* </h3>
+              </div>
+
+              <div class="form-group">
+                  <label for="esclarecido" class="control-label">ESCLARECIDO</label>
+                  <select name="esclarecido" class="form-control" required>
                       <option selected value="">Seleccione</option>
-                      @foreach ($tipo_semaforo as $item)
+                      @foreach ($tipo_si_no as $item)
                       <option value="{{ $item->tipo }}">{{ $item->tipo }}</option>
                       @endforeach
                   </select>
               </div>
 
               <div class="form-group">
-                  <label for="semaforo_muerte_vial" class="control-label">SEMAFORO</label>
-                  <select name="semaforo_muerte_vial" class="form-control" required>
+                  <label for="recupero_sustraido" class="control-label">SE RECUPERO LO SUSTRAIDO</label>
+                  <select name="recupero_sustraido" class="form-control" required>
                       <option selected value="">Seleccione</option>
-                      @foreach ($tipo_semaforo as $item)
+                      @foreach ($tipo_si_no as $item)
                       <option value="{{ $item->tipo }}">{{ $item->tipo }}</option>
                       @endforeach
                   </select>
               </div>
 
               <div class="form-group">
-                  <label for="semaforo_muerte_vial" class="control-label">SEMAFORO</label>
-                  <select name="semaforo_muerte_vial" class="form-control" required>
+                  <label for="status" class="control-label">DETENIDO</label>
+                  <select name="status" class="form-control" required>
                       <option selected value="">Seleccione</option>
-                      @foreach ($tipo_semaforo as $item)
+                      @foreach ($tipo_si_no as $item)
                       <option value="{{ $item->tipo }}">{{ $item->tipo }}</option>
                       @endforeach
                   </select>
               </div>
 
               <div class="form-group">
-                  <label for="semaforo_muerte_vial" class="control-label">SEMAFORO</label>
-                  <select name="semaforo_muerte_vial" class="form-control" required>
-                      <option selected value="">Seleccione</option>
-                      @foreach ($tipo_semaforo as $item)
-                      <option value="{{ $item->tipo }}">{{ $item->tipo }}</option>
-                      @endforeach
-                  </select>
+                  <label for="cantidad_detenidos">CANTIDAD DE DETENIDOS</label>
+                  <input type="number" name="cantidad_detenidos" class="form-control" value="{{ $denuncia->cantidad_detenidos }}">
               </div>
 
+              <div class="form-group">
+                  <label for="detenido_masculino">CANTIDAD DE DETENIDOS MASCULINOS</label>
+                  <input type="number" name="detenido_masculino" class="form-control" value="{{ $denuncia->detenido_masculino }}">
+              </div>
 
+              <div class="form-group">
+                  <label for="detenido_femenino">CANTIDAD DE DETENIDOS FEMENINOS</label>
+                  <input type="number" name="detenido_femenino" class="form-control" value="{{ $denuncia->detenido_femenino }}">
+              </div>
+
+              <div class="form-group">
+                  <label for="detenido_menor_18">CANTIDAD DE DETENIDOS MASCULINOS MENORES A 18 AÑOS</label>
+                  <input type="number" name="detenido_menor_18" class="form-control" value="{{ $denuncia->detenido_menor_18 }}">
+              </div>
+
+              <div class="form-group">
+                  <label for="detenido_mayor_18">CANTIDAD DE DETENIDOS MASCULINOS MAYORES A 18 AÑOS</label>
+                  <input type="number" name="detenido_mayor_18" class="form-control" value="{{ $denuncia->detenido_mayor_18 }}">
+              </div>
 
               <!-- Boton Modificar -->
+              <br />
               <div class="form-group">
                   <button class="btn btn-primary">Modificar</button>
               </div>
