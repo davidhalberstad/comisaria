@@ -176,6 +176,41 @@ class DenunciaController extends Controller
         $preventivo_judicial = new PreventivoJudicial();
 
         $preventivo_judicial->inculpado = $request->input('inculpado');
+        $preventivo_judicial->inculpado = $request->input('inculpado');
+        $preventivo_judicial->inculpado = $request->input('inculpado');
+        $preventivo_judicial->inculpado = $request->input('inculpado');
+        $preventivo_judicial->inculpado = $request->input('inculpado');
+        $preventivo_judicial->inculpado = $request->input('inculpado');
+        $preventivo_judicial->inculpado = $request->input('inculpado');
+        $preventivo_judicial->inculpado = $request->input('inculpado');
+        $preventivo_judicial->inculpado = $request->input('inculpado');
+        $preventivo_judicial->inculpado = $request->input('inculpado');
+        $preventivo_judicial->inculpado = $request->input('inculpado');
+        $preventivo_judicial->inculpado = $request->input('inculpado');
+        $preventivo_judicial->inculpado = $request->input('inculpado');
+        $preventivo_judicial->inculpado = $request->input('inculpado');
+        $preventivo_judicial->inculpado = $request->input('inculpado');
+        $preventivo_judicial->inculpado = $request->input('inculpado');
+        $preventivo_judicial->inculpado = $request->input('inculpado');
+        $preventivo_judicial->inculpado = $request->input('inculpado');
+        $preventivo_judicial->inculpado = $request->input('inculpado');
+        $preventivo_judicial->inculpado = $request->input('inculpado');
+        $preventivo_judicial->inculpado = $request->input('inculpado');
+        $preventivo_judicial->inculpado = $request->input('inculpado');
+        $preventivo_judicial->inculpado = $request->input('inculpado');
+        $preventivo_judicial->inculpado = $request->input('inculpado');
+        $preventivo_judicial->inculpado = $request->input('inculpado');
+        $preventivo_judicial->inculpado = $request->input('inculpado');
+        $preventivo_judicial->inculpado = $request->input('inculpado');
+        $preventivo_judicial->inculpado = $request->input('inculpado');
+        $preventivo_judicial->inculpado = $request->input('inculpado');
+        $preventivo_judicial->inculpado = $request->input('inculpado');
+        $preventivo_judicial->inculpado = $request->input('inculpado');
+        $preventivo_judicial->inculpado = $request->input('inculpado');
+        $preventivo_judicial->inculpado = $request->input('inculpado');
+        $preventivo_judicial->inculpado = $request->input('inculpado');
+        $preventivo_judicial->inculpado = $request->input('inculpado');
+        $preventivo_judicial->inculpado = $request->input('inculpado');
 
         $preventivo_judicial->save();
 
