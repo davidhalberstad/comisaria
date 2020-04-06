@@ -30,6 +30,7 @@ use App\TipoOcasionHomicidio;
 use App\TipoPersona;
 use App\TipoSuicidio;
 use App\TipoSiNo;
+use App\VehiculoRobado;
 
 
 class DenunciaController extends Controller
@@ -208,11 +209,6 @@ class DenunciaController extends Controller
         $preventivo_judicial->edad_suicida = $request->input('edad_suicida');
         $preventivo_judicial->sexo_testigo_suicidios = $request->input('sexo_testigo_suicidios');
         $preventivo_judicial->edad_testigo_suicidios = $request->input('edad_testigo_suicidios');
-        // $preventivo_judicial->letra = $request->input('letra');
-        // $preventivo_judicial->nro = $request->input('nro');
-        // $preventivo_judicial->marca = $request->input('marca');
-        // $preventivo_judicial->motor = $request->input('motor');
-        // $preventivo_judicial->chasis = $request->input('chasis');
         $preventivo_judicial->esclarecido = $request->input('esclarecido');
         $preventivo_judicial->recupero_sustraido = $request->input('recupero_sustraido');
         $preventivo_judicial->detenido = $request->input('detenido');
@@ -228,8 +224,30 @@ class DenunciaController extends Controller
         $date = Carbon::now();
         $preventivo_judicial->fecha_carga = $date;
 
+        //Inserto datos de Vehiculos robados
+        $vehiculo_robado = new VehiculoRobado();
+
+        if($request->input('hecho') == 'HURTO MOTOCICLETA')
+        {
+          $vehiculo_robado->dominio = $request->input('nro').$request->input('letra');
+        }
+        elseif($request->input('hecho') == 'HURTO AUTOMOTOR')
+        {
+          $vehiculo_robado->dominio = $request->input('letra').$request->input('nro');
+        }
+
+        $vehiculo_robado->datos_vehiculo = $request->input('marca');
+        $vehiculo_robado->motor = $request->input('motor');
+        $vehiculo_robado->chasis = $request->input('chasis');
+
 
         $preventivo_judicial->save();
+
+
+        if($request->input('hecho') == 'HURTO MOTOCICLETA' || $request->input('hecho') == 'HURTO AUTOMOTOR' )
+        {
+          $vehiculo_robado->save();
+        }
 
 
         return back()->with('notification', 'Modificado Exitosamente!!!');
