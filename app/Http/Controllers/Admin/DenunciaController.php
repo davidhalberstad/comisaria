@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Carbon\Carbon; //Editor de fecha
 
 use App\Denuncias;
 use App\PreventivoJudicial;
@@ -222,6 +223,10 @@ class DenunciaController extends Controller
         $preventivo_judicial->detenido_mayor_18 = $request->input('detenido_mayor_18');
         $preventivo_judicial->latitud = $request->input('latitud');
         $preventivo_judicial->longitud = $request->input('longitud');
+
+        //edito el formato de la fecha
+        $date = Carbon::now();
+        $preventivo_judicial->fecha_carga = $date;
 
 
         $preventivo_judicial->save();
