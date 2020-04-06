@@ -39,7 +39,7 @@
 
               <div class="form-group">
                   <label for="tipo_dni">Tipo Documento </label>
-                  <input type="text" name="tipo_dni" class="form-control" value="{{ $denuncia->tipo_dni }}">
+                  <input type="number" name="tipo_dni" class="form-control" value="{{ $denuncia->tipo_dni }}">
               </div>
 
               <div class="form-group">
@@ -49,7 +49,7 @@
 
               <div class="form-group">
                   <label for="edad">Edad </label>
-                  <input type="text" name="edad" class="form-control" value="{{ $denuncia->edad }}">
+                  <input type="number" name="edad" class="form-control" value="{{ $denuncia->edad }}">
               </div>
 
               <div class="form-group">
@@ -120,21 +120,21 @@
             <label for="direccion_gps">Direccion GPS  </label>
                 <input type="text" name="direccion_gps" class="form-control" value="{{ $denuncia->direccion_gps }}">
           </div>
-
+-->
           <div class="form-group">
-            <label for="latitud">Latitud  </label>
-                <input type="text" name="latitud" class="form-control" value="{{ $denuncia->latitud }}">
+            <!-- <label for="latitud">Latitud  </label> -->
+                <input type="hidden" name="latitud" class="form-control" value="{{ $denuncia->latitud }}">
           </div>
 
           <div class="form-group">
-            <label for="longitud">Longitud  </label>
-                <input type="text" name="longitud" class="form-control" value="{{ $denuncia->longitud }}">
+            <!-- <label for="longitud">Longitud  </label> -->
+                <input type="hidden" name="longitud" class="form-control" value="{{ $denuncia->longitud }}">
           </div>
 
-          <div class="form-group">
+          <!-- <div class="form-group">
             <label for="estado">Estado  </label>
                 <input type="text" name="estado" class="form-control" value="{{ $denuncia->estado }}">
-          </div> -->
+          </div>  -->
 
               <!-- Comienza la carga de complementacion de la denuncia -->
               <hr> </hr>
@@ -171,17 +171,22 @@
               </div>
 
               <div class="form-group">
-                  <label for="tipo_lugar_hecho">Lugar del Hecho </label>
+                  <label for="lugar_hecho">LUGAR DEL HECHO </label>
+                  <input type="text" name="lugar_hecho" class="form-control" value="{{ $denuncia->lugar_hecho }}">
+              </div>
+
+              <div class="form-group">
+                  <label for="tipo_lugar_hecho">TIPO LUGAR DEL HECHO </label>
                   <select name="tipo_lugar_hecho" class="form-control" required>
                       <option selected value="">Seleccionar</option>
-                      @foreach( $tipo_lugar_hecho as $category )
-                      <option value="{{ $category->tipo_lugar_hecho }}">{{ $category->tipo_lugar_hecho }}</option>
+                      @foreach( $tipo_lugar_hecho as $item )
+                      <option value="{{ $item->tipo_lugar_hecho }}">{{ $item->tipo_lugar_hecho }}</option>
                       @endforeach
                   </select>
               </div>
 
               <div class="form-group">
-                  <label for="tipo_via_lugar_hecho">Lugar de Via </label>
+                  <label for="tipo_via_lugar_hecho">TIPO VIA: </label>
                   <select name="tipo_via_lugar_hecho" class="form-control" required>
                       <option selected value="">Seleccionar</option>
                       @foreach( $tipo_via as $category )
@@ -191,12 +196,12 @@
               </div>
 
               <div class="form-group">
-                  <label for="calle_lugar_hecho">Calle </label>
+                  <label for="calle_lugar_hecho">CALLE </label>
                   <input type="text" name="calle_lugar_hecho" class="form-control" value="{{ $denuncia->calle_lugar_hecho }}">
               </div>
 
               <div class="form-group">
-                  <label for="altura_lugar_hecho">Altura </label>
+                  <label for="altura_lugar_hecho">ALTURA </label>
                   <input type="text" name="altura_lugar_hecho" class="form-control" value="{{ $denuncia->altura_lugar_hecho }}">
               </div>
 
@@ -212,8 +217,8 @@
 
               <!-- Select Padre -->
               <div class="form-group">
-                  <label for="" class="control-label">Seleccione Circunscripcion Judicial</label>
-                  <select name="categorias" id="categorias" class="form-control">
+                  <label for="" class="control-label">Seleccione CIRCUNSCRIPCION JUDICIAL</label>
+                  <select name="circunscripcion_judicial" id="circunscripcion_judicial" class="form-control">
                       <option value="">Seleccione</option>
                       @foreach ($categorias as $categoria)
                       <option value="{{ $categoria->id }}">{{ $categoria->opcion }}</option>
@@ -221,17 +226,30 @@
                   </select>
               </div>
 
-              <!-- Select Hijo Nivel 1 -->
+        <!-- Select Hijo Nivel 1 -->
               <div class="form-group">
-                  <label for="" class="control-label">Seleccione Juzgado</label>
-                  <select name="productos" id="productos" class="form-control">
-
+                  <label for="" class="control-label">Seleccione JUZGADO</label>
+                  <select name="juzgado" id="juzgado" class="form-control">
                       <option value="">Seleccione</option>
+                      @foreach ($categorias as $categoria)
+                      <option value="{{ $categoria->id }}">{{ $categoria->opcion }}</option>
+                      @endforeach
+                  </select>
+              </div>
+
+        <!-- Select Hijo Nivel 2 -->
+              <div class="form-group">
+                  <label for="" class="control-label">Seleccione SECRETARIA</label>
+                  <select name="secretaria" id="secretaria" class="form-control">
+                      <option value="">Seleccione</option>
+                      @foreach ($categorias as $categoria)
+                      <option value="{{ $categoria->id }}">{{ $categoria->opcion }}</option>
+                      @endforeach
                   </select>
               </div>
 
               <div class="form-group">
-                  <label for="hecho" class="control-label">Hecho</label>
+                  <label for="hecho" class="control-label">HECHO</label>
                   <select name="hecho" class="form-control" required>
                       <option value="">Seleccione</option>
                       @foreach ($hechos as $item)
@@ -241,8 +259,8 @@
               </div>
 
               <div class="form-group">
-                  <label for="modus_operandi" class="control-label">Modus Operandi</label>
-                  <select name="modus_operandi" class="form-control" required>
+                  <label for="modus_operandi_fk" class="control-label">MODUS OPERANDI</label>
+                  <select name="modus_operandi_fk" class="form-control" required>
                       <option value="">Seleccione</option>
                       @foreach ($modusoperandys as $item)
                       <option value="{{ $item->id }}">{{ $item->modus_operandi }}</option>
@@ -255,7 +273,7 @@
                   <select name="motivo_origina_instruccion_causa" class="form-control" required>
                       <option value="">Seleccione</option>
                       @foreach ($origen_instruccions as $item)
-                      <option value="{{ $item->id }}">{{ $item->tipo }}</option>
+                      <option value="{{ $item->tipo }}">{{ $item->tipo }}</option>
                       @endforeach
                   </select>
               </div>
@@ -499,8 +517,8 @@
               </div>
 
               <div class="form-group">
-                  <label for="status" class="control-label">DETENIDO</label>
-                  <select name="status" class="form-control" required>
+                  <label for="detenido" class="control-label">DETENIDO</label>
+                  <select name="detenido" class="form-control" required>
                       <option selected value="">Seleccione</option>
                       @foreach ($tipo_si_no as $item)
                       <option value="{{ $item->tipo }}">{{ $item->tipo }}</option>
