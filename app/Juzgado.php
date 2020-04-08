@@ -11,5 +11,9 @@ class Juzgado extends Model
       protected $fillable = [
           'id', 'opcion', 'relacion'
       ];
-
+      //
+      // public static function juzgado($id){
+      //   return Juzgado::where('relacion','=',$id)
+      //   ->get();
+      // }
 }
