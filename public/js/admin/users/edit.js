@@ -4,8 +4,8 @@ $(function(){
 
 function onSelectProjectChange() {
     var project_id = $(this).val();
-    
-   
+
+
     // AJAX
     if (! project_id)
     $('#select-level').html('<option value="">Seleccione Nivel</option>');
@@ -14,6 +14,6 @@ function onSelectProjectChange() {
         var html_select = '<option value="">Seleccione Nivel</option>';
         for (var i=0; i<data.length; ++i)
             html_select += '<option value="'+data[i].id+'">'+data[i].name+'</option>';
-        $('#select-level').html(html_select);    
+        $('#select-level').html(html_select);
     });
 }
