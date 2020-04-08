@@ -218,10 +218,10 @@
               <!-- Select Padre -->
               <div class="form-group">
                   <label for="" class="control-label">Seleccione CIRCUNSCRIPCION JUDICIAL</label>
-                  <select name="circunscripcion_judicial" id="circunscripcion_judicial" class="form-control">
+                  <select name="circunscripcion_judicial" id="circunscripcion-judicial" class="form-control">
                       <option value="">Seleccione</option>
-                      @foreach ($categorias as $categoria)
-                      <option value="{{ $categoria->id }}">{{ $categoria->opcion }}</option>
+                      @foreach ($circunscripcion as $item)
+                      <option value="{{ $item->id }}">{{ $item->opcion }}</option>
                       @endforeach
                   </select>
               </div>
@@ -230,10 +230,11 @@
               <div class="form-group">
                   <label for="" class="control-label">Seleccione JUZGADO</label>
                   <select name="juzgado" id="juzgado" class="form-control">
-                      <option value="">Seleccione</option>
-                      @foreach ($categorias as $categoria)
-                      <option value="{{ $categoria->id }}">{{ $categoria->opcion }}</option>
-                      @endforeach
+                    <option value="">Seleccione</option>
+                    @foreach ($juzgado as $item)
+                    <option value="{{ $item->id }}">{{ $item->relacion }} {{ $item->opcion }}</option>
+                    @endforeach
+
                   </select>
               </div>
 
@@ -242,8 +243,8 @@
                   <label for="" class="control-label">Seleccione SECRETARIA</label>
                   <select name="secretaria" id="secretaria" class="form-control">
                       <option value="">Seleccione</option>
-                      @foreach ($categorias as $categoria)
-                      <option value="{{ $categoria->id }}">{{ $categoria->opcion }}</option>
+                      @foreach ($secretaria as $categoria)
+                      <option value="{{ $item->id }}">{{ $item->relacion }} {{ $item->opcion }}</option>
                       @endforeach
                   </select>
               </div>
@@ -565,25 +566,8 @@
 @endsection
 
 @section('scripts')
-    <script src="/js/admin/denuncias/edit.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ajaxy/1.6.1/scripts/jquery.ajaxy.min.js"></script>
-    <script>
-    $(document).ready(function(){
-    $("#categorias").change(function(){
-      var categoria = $(this).val();
 
-      $.get('/productByCategory/'+categoria, function(data){
-//esta el la peticion get, la cual se divide en tres partes. ruta,variables y funcion
-        console.log(data);
-          var producto_select = '<option value="">Seleccione Porducto</option>'
-            for (var i=0; i<data.length;i++)
-              producto_select+='<option value="'+data[i].id+'">'+data[i].opcion+'</option>';
 
-            $("#productos").html(producto_select);
-
-      });
-    });
-  });
-    </script>
 @endsection
