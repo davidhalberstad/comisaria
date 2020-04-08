@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Carbon\Carbon; //Editor de fecha
+use Illuminate\Database\Eloquent\Collection;
 
 use App\Denuncias;
 use App\PreventivoJudicial;
@@ -16,6 +17,7 @@ use App\TipoLugarHecho;
 use App\TipoVia;
 use App\Circunscripcion;
 use App\Juzgado;
+use App\Secretaria;
 use App\Hecho;
 use App\ModusOperandy;
 use App\OrigenInstruccion;
@@ -35,6 +37,12 @@ use App\VehiculoRobado;
 
 class DenunciaController extends Controller
 {
+  public function byProject($id)
+  {
+     return Juzgado::where('relacion', $id)->get();
+
+  }
+
 
 //Index
     public function index()
@@ -103,6 +111,7 @@ class DenunciaController extends Controller
     public function edit($id)
     {
 
+
         $denuncia = Denuncias::findOrFail($id);
         $localidades = Localidad::all();
         $tipo_inculpado = TipoInculpado::orderBy('tipo', 'ASC')->get();
@@ -110,7 +119,9 @@ class DenunciaController extends Controller
         $tipo_rango_edad = TipoRangoEdad::orderBy('tipo', 'ASC')->get();
         $tipo_lugar_hecho = TipoLugarHecho::orderBy('tipo_lugar_hecho', 'ASC')->get();
         $tipo_via = TipoVia::orderBy('tipo', 'ASC')->get();
-        $categorias = Circunscripcion::orderBy('opcion', 'ASC')->get();
+        $circunscripcion = Circunscripcion::orderBy('opcion', 'ASC')->get();
+        $juzgado = Juzgado::orderBy('opcion', 'ASC')->get();
+        $secretaria = Secretaria::orderBy('opcion', 'ASC')->get();
         $hechos = Hecho::orderBy('delito', 'ASC')->get();
         $modusoperandys = ModusOperandy::orderBy('modus_operandi', 'ASC')->get();
         $origen_instruccions = OrigenInstruccion::orderBy('tipo', 'ASC')->get();
@@ -127,24 +138,12 @@ class DenunciaController extends Controller
         $tipo_si_no = TipoSiNo::orderBy('id', 'ASC')->get();
 
 
-        return view('admin.denuncias.edit')->with(compact('denuncia', 'localidades', 'tipo_inculpado', 'sexo', 'tipo_rango_edad', 'tipo_lugar_hecho', 'tipo_via', 'categorias', 'hechos', 'modusoperandys', 'origen_instruccions', 'tipo_vinculo', 'tipo_semaforo', 'tipo_muerte_vial', 'tipo_condicion_climatica', 'tipo_clase_victima_vial', 'tipo_vehiculo_victima', 'tipo_arma', 'tipo_ocasion_homicidio', 'tipo_persona', 'tipo_suicidio', 'tipo_si_no'));
+        return view('admin.denuncias.edit')->with(compact('denuncia', 'localidades', 'tipo_inculpado', 'sexo', 'tipo_rango_edad', 'tipo_lugar_hecho', 'tipo_via', 'circunscripcion', 'juzgado', 'secretaria', 'hechos', 'modusoperandys', 'origen_instruccions', 'tipo_vinculo', 'tipo_semaforo', 'tipo_muerte_vial', 'tipo_condicion_climatica', 'tipo_clase_victima_vial', 'tipo_vehiculo_victima', 'tipo_arma', 'tipo_ocasion_homicidio', 'tipo_persona', 'tipo_suicidio', 'tipo_si_no'));
     }
 
 //Update
     public function update($id, Request $request)
     {
-
-        $rules = [
-            // 'name' => 'required|max:255',
-            // 'email' => 'required|email|max:255|unique:users',
-            // 'password' => 'required|min:6|confirmed'
-        ];
-
-        $messages = [
-            // 'name.required' => 'Es necesario ingresar un nombre de Usuario.',
-            // 'email' => 'Es necesario ingresar un E-mail',
-            // 'password' => 'Es nesario ingresar una Clave'
-        ];
 
         $this->validate($request, $rules, $messages);
 
@@ -224,6 +223,8 @@ class DenunciaController extends Controller
         $date = Carbon::now();
         $preventivo_judicial->fecha_carga = $date;
 
+        $preventivo_judicial->save();
+
         //Inserto datos de Vehiculos robados
         $vehiculo_robado = new VehiculoRobado();
 
@@ -240,14 +241,12 @@ class DenunciaController extends Controller
         $vehiculo_robado->motor = $request->input('motor');
         $vehiculo_robado->chasis = $request->input('chasis');
 
-
-        $preventivo_judicial->save();
-
-
         if($request->input('hecho') == 'HURTO MOTOCICLETA' || $request->input('hecho') == 'HURTO AUTOMOTOR' )
         {
           $vehiculo_robado->save();
         }
+
+
 
 
         return back()->with('notification', 'Modificado Exitosamente!!!');
@@ -262,5 +261,15 @@ class DenunciaController extends Controller
         return back()->with('notification', 'Eliminado Exitosamente!!!');
     }
 
+//pdf
+    public function imprimir($id)
+    {
+      $denuncia = Denuncias::findOrFail($id)
+                            ->first();
+
+      $today = Carbon::now()->format('d/m/Y');
+      $pdf = \PDF::loadView('admin.denuncias.denuncia', compact('today', 'denuncia'));
+      return $pdf->download($denuncia->apellido.'_'. $denuncia->nombre.'_denuncia.pdf');
+    }
 
 }
