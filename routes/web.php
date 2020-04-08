@@ -34,9 +34,13 @@ Route::group(['middleware'=>'admin', 'namespace'=>'Admin'], function (){
 
   Route::resource('/denuncia', 'DenunciaController');
 
-  Route::Get('productByCategory/{id}', 'DenunciaController@byCategory');
+//select anidado
+  Route::Get('juzgado/{id}', 'DenunciaController@getJuzgado');
   //como pasamos la variable correspondiente al id de la categoría como parámetro en la url en la ruta lo recibimos como parámetro
 
+
+  //PDF
+  Route::get('/imprimir/{id}', 'DenunciaController@imprimir')->name('print');
 
     // // Users
     // Route::get('/usuarios', 'UserController@index');
