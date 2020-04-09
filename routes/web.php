@@ -7,6 +7,7 @@ Route::get('/', function () {
 Route::get('/welcome', function () {
     return view('welcome');
 });
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
@@ -41,6 +42,10 @@ Route::group(['middleware'=>'admin', 'namespace'=>'Admin'], function (){
 
   //PDF
   Route::get('/imprimir/{id}', 'DenunciaController@imprimir')->name('print');
+
+  //Vista del Reporte de Denuncia
+  Route::get('/reporte_denuncia/{id}', 'DenunciaController@reporteDenuncia');
+
 
     // // Users
     // Route::get('/usuarios', 'UserController@index');
