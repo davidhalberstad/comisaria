@@ -264,12 +264,24 @@ class DenunciaController extends Controller
 //pdf
     public function imprimir($id)
     {
-      $denuncia = Denuncias::findOrFail($id)
-                            ->first();
+      $denuncia = Denuncias::findOrFail($id);
 
       $today = Carbon::now()->format('d/m/Y');
-      $pdf = \PDF::loadView('admin.denuncias.denuncia', compact('today', 'denuncia'));
+      $pdf = \PDF::loadView('admin.denuncias.reporte_denuncia', compact('today', 'denuncia'));
       return $pdf->download($denuncia->apellido.'_'. $denuncia->nombre.'_denuncia.pdf');
     }
+
+    //Reporte Denuncia
+        public function reporteDenuncia($id)
+        {
+          $denuncia = Denuncias::findOrFail($id);
+          Carbon::setLocale('es');
+          $date = new Carbon($denuncia->fecha_denuncia);
+          $date = $date->isoFormat('dddd[,] d [días del mes de] MMMM [del año] YYYY'); // miercoles, 8 del mes de abril del año 2020
+
+          // $date = $date->format('l jS \\of F Y h:i:s A');
+          return view('admin.denuncias.reporte_denuncia')->with(compact('denuncia', 'date'));
+        }
+
 
 }
