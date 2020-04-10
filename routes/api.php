@@ -20,7 +20,7 @@ use Illuminate\Http\Request;
 // Route::get('/proyecto/{id}/niveles', 'Admin\LevelController@byProject');
 //
 
-Route::get('/denuncia/{id}/niveles', 'Admin\DenunciaController@byProject');
+Route::get('/denuncia/{id}/niveles', 'Admin\DenunciaController@byCategory');
 
 
 //Extraer los datos de la Base de Datos para armar el DataTable

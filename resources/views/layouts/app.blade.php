@@ -23,6 +23,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 
+  <!-- Select2 -->
+  <link rel="stylesheet" href="{!! asset('select2-4.0.13/dist/css/select2.min.css') !!}">
+
+  <!-- Chosen -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.7/chosen.min.css">
 
 
 </head>
@@ -120,19 +125,26 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <!-- ./wrapper -->
 
 <!-- REQUIRED SCRIPTS -->
-
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <!-- jQuery -->
-<script src="{!! asset('adminlte/plugins/jquery/jquery.min.js') !!}"></script>
+<!-- <script src="{!! asset('adminlte/plugins/jquery/jquery.min.js') !!}"></script> -->
 <!-- DataTables -->
-<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
 <!-- Bootstrap 4 -->
 <script src="{!! asset('adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js') !!}"></script>
 <!-- AdminLTE App -->
-<script src="{!! asset('adminlte/dist/js/adminlte.min.js') !!}"></script>
+<!-- <script src="{!! asset('adminlte/dist/js/adminlte.min.js') !!}"></script> -->
 <!-- Selected Anidados -->
-<script src="{!! asset('js/admin/denuncias/edit.js') !!}"></script>
+<!-- <script src="{!! asset('js/admin/denuncias/edit.js') !!}"></script> -->
+<!-- Select2 -->
+<script src="{!! asset('select2-4.0.13/dist/js/select2.min.js') !!}"></script>
+
+<!-- Chosen -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.7/chosen.jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.7/chosen.proto.min.js"></script>
+
+
 
 
 </body>

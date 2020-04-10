@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Carbon\Carbon; //Editor de fecha
 use Illuminate\Database\Eloquent\Collection;
+use App\Http\Controllers\Admin\DB;
 
 use App\Denuncias;
 use App\PreventivoJudicial;
@@ -33,14 +34,20 @@ use App\TipoPersona;
 use App\TipoSuicidio;
 use App\TipoSiNo;
 use App\VehiculoRobado;
+use App\TipoHecho;
 
 
 class DenunciaController extends Controller
 {
-  public function byProject($id)
+//Select Anidados
+  public function byCategory($id)
   {
      return Juzgado::where('relacion', $id)->get();
+  }
 
+  public function bySecretaria($id)
+  {
+     return Secretaria::where('relacion', $id)->get();
   }
 
 
@@ -136,9 +143,10 @@ class DenunciaController extends Controller
         $tipo_persona = TipoPersona::orderBy('id', 'ASC')->get();
         $tipo_suicidio = TipoSuicidio::orderBy('id', 'ASC')->get();
         $tipo_si_no = TipoSiNo::orderBy('id', 'ASC')->get();
+        $tipo_hecho = TipoHecho::orderBy('id', 'ASC')->get();
 
 
-        return view('admin.denuncias.edit')->with(compact('denuncia', 'localidades', 'tipo_inculpado', 'sexo', 'tipo_rango_edad', 'tipo_lugar_hecho', 'tipo_via', 'circunscripcion', 'juzgado', 'secretaria', 'hechos', 'modusoperandys', 'origen_instruccions', 'tipo_vinculo', 'tipo_semaforo', 'tipo_muerte_vial', 'tipo_condicion_climatica', 'tipo_clase_victima_vial', 'tipo_vehiculo_victima', 'tipo_arma', 'tipo_ocasion_homicidio', 'tipo_persona', 'tipo_suicidio', 'tipo_si_no'));
+        return view('admin.denuncias.edit')->with(compact('denuncia', 'localidades', 'tipo_inculpado', 'sexo', 'tipo_rango_edad', 'tipo_lugar_hecho', 'tipo_via', 'circunscripcion', 'juzgado', 'secretaria', 'hechos', 'modusoperandys', 'origen_instruccions', 'tipo_vinculo', 'tipo_semaforo', 'tipo_muerte_vial', 'tipo_condicion_climatica', 'tipo_clase_victima_vial', 'tipo_vehiculo_victima', 'tipo_arma', 'tipo_ocasion_homicidio', 'tipo_persona', 'tipo_suicidio', 'tipo_si_no', 'tipo_hecho'));
     }
 
 //Update
@@ -268,7 +276,7 @@ class DenunciaController extends Controller
 
       $today = Carbon::now()->format('d/m/Y');
       $pdf = \PDF::loadView('admin.denuncias.reporte_denuncia', compact('today', 'denuncia'));
-      return $pdf->download($denuncia->apellido.'_'. $denuncia->nombre.'_denuncia.pdf');
+      return $pdf->stream($denuncia->apellido.'_'. $denuncia->nombre.'_denuncia.pdf');
     }
 
     //Reporte Denuncia
@@ -277,11 +285,32 @@ class DenunciaController extends Controller
           $denuncia = Denuncias::findOrFail($id);
           Carbon::setLocale('es');
           $date = new Carbon($denuncia->fecha_denuncia);
-          $date = $date->isoFormat('dddd[,] d [días del mes de] MMMM [del año] YYYY'); // miercoles, 8 del mes de abril del año 2020
+          //$date = $date->isoFormat('dddd[,] d [días del mes de] MMMM [del año] YYYY'); // miercoles, 8 del mes de abril del año 2020
 
-          // $date = $date->format('l jS \\of F Y h:i:s A');
-          return view('admin.denuncias.reporte_denuncia')->with(compact('denuncia', 'date'));
+          return view('admin.denuncias.reporte_denuncia')->with(compact('denuncia'));
         }
+    //Visualizar
+        public function visualizar()
+        {
+           return view('admin.denuncias.visualizar');
+        }
+
+    //HOME
+        public function home()
+        {
+          $suma_denuncias = Denuncias::count('id');
+          $suma_tipo_hecho_otros = Denuncias::where('tipo_hecho', 1)->count();
+          $suma_tipo_hecho_propiedad = Denuncias::where('tipo_hecho', 8)->count();
+          $suma_tipo_hecho_personas = Denuncias::where('tipo_hecho', 11)->count();
+          $suma_tipo_hecho_sexual = Denuncias::where('tipo_hecho', 6)->count();
+
+          //Grafico
+          $tipo = array('DEL.C/LA PROPIEDAD', 'DEL.C/LAS PERSONAS', 'DEL.C/INTEG.SEXUAL');
+          $data  = array($suma_tipo_hecho_propiedad, $suma_tipo_hecho_personas, $suma_tipo_hecho_sexual);
+
+           return view('admin.denuncias.home')->with(compact('suma_denuncias', 'suma_tipo_hecho_otros', 'suma_tipo_hecho_propiedad', 'suma_tipo_hecho_personas', 'suma_tipo_hecho_sexual', 'data', 'tipo' ));
+        }
+
 
 
 }

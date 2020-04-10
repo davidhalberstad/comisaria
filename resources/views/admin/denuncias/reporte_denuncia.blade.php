@@ -7,9 +7,9 @@
     <style>
     /* Patametros del contenido completo del texto */
         .contenido  {
-             font-size: 20px; /* tamanio del texto */
+            font-size: 20px; /* tamanio del texto */
             line-height: 100%; /* interlineado */
-            font-family: Arial;
+            font-family: "Times New Roman", Times, serif;
         }
     /* Patametros del contenido del la primera linea */
         #titulo {
@@ -56,7 +56,7 @@
 
       <p id="titulo">{{ $denuncia->apellido }} {{ $denuncia->nombre }} S/Denuncia.-</p>
 
-      <p id="cuerpo">En la Comisaría Seccional Décimo Cuarta UR-X de Policía de la ciudad de Garupa de la Provincia de Misiones,  {{ $date }}, siendo las {{ $denuncia->hora_denuncia }} horas; comparece ante Mí Funcionario de Policía que suscribe, titular de esta Dependencia y Secretario que al efecto designo, quien presente acepta el cargo conferido bajo formalidades legales; una persona que manifiesta deseos de radicar una denuncia, a la cual se le hace saber de la penalidades con que la Ley sanciona a los que se produjeren con falsedad en sus denuncias, según lo establece el artículo 245° del C.P.A. y en concordancia con el artículo 122° del C.P.P.M. LEY XIV - NRO. 13, prestó juramento de ley mediante la siguiente formula “JURA CON PLENO CONOCIMIENTO DE RESPONSABILIDAD ANTE SU CONCIENCIA Y ANTE EL PUEBLO DE LA PROVINCIA DE MISIONES QUE DIRÁ VERDAD DE TODO CUANTO SUPIERE Y LE FUERE PREGUNTADO Y QUE NADA OCULTARA”, respondiendo “SI JURO”; Seguidamente es requerido por sus nombres, apellidos y demás datos de identidad persona DIJO LLAMARSE:
+      <p id="cuerpo">En la Comisaría Seccional Décimo Cuarta UR-X de Policía de la ciudad de Garupa de la Provincia de Misiones, , siendo las {{ $denuncia->hora_denuncia }} horas; comparece ante Mí Funcionario de Policía que suscribe, titular de esta Dependencia y Secretario que al efecto designo, quien presente acepta el cargo conferido bajo formalidades legales; una persona que manifiesta deseos de radicar una denuncia, a la cual se le hace saber de la penalidades con que la Ley sanciona a los que se produjeren con falsedad en sus denuncias, según lo establece el artículo 245° del C.P.A. y en concordancia con el artículo 122° del C.P.P.M. LEY XIV - NRO. 13, prestó juramento de ley mediante la siguiente formula “JURA CON PLENO CONOCIMIENTO DE RESPONSABILIDAD ANTE SU CONCIENCIA Y ANTE EL PUEBLO DE LA PROVINCIA DE MISIONES QUE DIRÁ VERDAD DE TODO CUANTO SUPIERE Y LE FUERE PREGUNTADO Y QUE NADA OCULTARA”, respondiendo “SI JURO”; Seguidamente es requerido por sus nombres, apellidos y demás datos de identidad persona DIJO LLAMARSE:
 
       {{ $denuncia->apellido }} {{ $denuncia->nombre }}, Documento:  {{ $denuncia->tipo_dni }} {{ $denuncia->nro_documento }}, ({{ $denuncia->edad }}), {{ $denuncia->domicilio }}, {{ $denuncia->sexo }}, {{ $denuncia->telefono_fijo }}, {{ $denuncia->telefono_celular }}, {{ $denuncia->correo_electronico }}.
 

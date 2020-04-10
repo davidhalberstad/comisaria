@@ -11,4 +11,10 @@ class Denuncias extends Model
   protected $fillable = [
       'apellido', 'nombre', 'nro_documento'
   ];
+
+  public function tipohecho()
+  {
+      return $this->hasMany('App\TipoHecho');
+  }
+
 }

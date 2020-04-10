@@ -10,7 +10,7 @@ Route::get('/welcome', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+// Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/reportar', 'HomeController@getReport');
 
@@ -32,19 +32,27 @@ Route::group(['middleware'=>'admin', 'namespace'=>'Admin'], function (){
 
     Route::get('/denuncia/{id}/eliminar', 'DenunciaController@delete')->name('delete');
 
+    Route::get('/visualizar', 'DenunciaController@visualizar')->name('visualizar');
 
-  Route::resource('/denuncia', 'DenunciaController');
+    Route::get('/home', 'DenunciaController@home')->name('home');
+
+
+  // Route::resource('/denuncia', 'DenunciaController');
 
 //select anidado
-  Route::Get('juzgado/{id}', 'DenunciaController@getJuzgado');
+
+Route::get('productByCategory/{id}', 'DenunciaController@byCategory')->name('productByCategory');
   //como pasamos la variable correspondiente al id de la categoría como parámetro en la url en la ruta lo recibimos como parámetro
 
+Route::get('productBySecretaria/{id}', 'DenunciaController@bySecretaria')->name('productBySecretaria');
+  //como pasamos la variable correspondiente al id de la categoría como parámetro en la url en la ruta lo recibimos como parámetro
 
   //PDF
   Route::get('/imprimir/{id}', 'DenunciaController@imprimir')->name('print');
 
   //Vista del Reporte de Denuncia
-  Route::get('/reporte_denuncia/{id}', 'DenunciaController@reporteDenuncia');
+  Route::get('/reporte_denuncia/{id}', 'DenunciaController@reporteDenuncia')->name('reporte_denuncia');
+
 
 
     // // Users

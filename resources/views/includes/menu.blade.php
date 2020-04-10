@@ -13,7 +13,7 @@
       </a>
       <ul class="nav nav-treeview">
         <li class="nav-item">
-          <a href="{{ url('home') }}" class="nav-link {{ ! Route::is('home') ?: 'active' }}">
+          <a href="{{ url('visualizar') }}" class="nav-link {{ ! Route::is('visualizar') ?: 'active' }}">
             <i class="far fa-circle nav-icon"></i>
             <p>Ver Denuncias</p>
           </a>

@@ -1,6 +1,14 @@
 @extends('layouts.app')
 
 @section('content')
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" />
+<link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet" />
+@mapstyles
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+  integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+  crossorigin=""/>
+
+
 <div class="card">
     <div class="card-header">Editar Denuncia</div>
 
@@ -36,11 +44,11 @@
                   <label for="nombre">Nombre</label>
                   <input type="text" name="nombre" class="form-control" value="{{ $denuncia->nombre }}">
               </div>
-
+<!--
               <div class="form-group">
                   <label for="tipo_dni">Tipo Documento </label>
                   <input type="number" name="tipo_dni" class="form-control" value="{{ $denuncia->tipo_dni }}">
-              </div>
+              </div> -->
 
               <div class="form-group">
                   <label for="nro_documento">DNI </label>
@@ -97,9 +105,9 @@
                   <input type="text" name="ubicacion" class="form-control" value="{{ $denuncia->ubicacion }}">
               </div>
 
-              <div class="form-group">
+              <div class="form-group" >
                   <label for="localidad">Localidad </label>
-                  <select name="localidad" class="form-control">
+                  <select name="localidad" class="form-control js-example-basic-single" >
                       @foreach( $localidades as $category )
                       <option value="{{ $category->id }}" @if($denuncia->localidad=== $category->id) selected='selected' @endif>{{ $category->municipio }}</option>
                       @endforeach
@@ -108,12 +116,16 @@
 
               <div class="form-group">
                   <label for="tipo_hecho">Tipo de Hecho a Denunciar </label>
-                  <input type="integer" name="tipo_hecho" class="form-control" value="{{ $denuncia->tipo_hecho }}">
-              </div>
+                  <select name="tipo_hecho" class="form-control" >
+                      @foreach( $tipo_hecho as $category )
+                      <option value="{{ $category->id }}" @if($denuncia->tipo_hecho=== $category->id) selected='selected' @endif>{{ $category->tipo }}</option>
+                      @endforeach
+                  </select>
+            </div>
 
               <div class="form-group">
                   <label for="relato">Relato </label>
-                  <textarea name="relato" id="relato" rows="5" cols="128">{{ $denuncia->relato }}</textarea>
+                  <textarea name="relato" id="relato" rows="10" cols="128">{{ $denuncia->relato }}</textarea>
               </div>
 
               <!-- <div class="form-group">
@@ -218,7 +230,7 @@
               <!-- Select Padre -->
               <div class="form-group">
                   <label for="" class="control-label">Seleccione CIRCUNSCRIPCION JUDICIAL</label>
-                  <select name="circunscripcion_judicial" id="circunscripcion-judicial" class="form-control">
+                  <select name="circunscripcion_judicial" id="circunscripcion_judicial" class="form-control">
                       <option value="">Seleccione</option>
                       @foreach ($circunscripcion as $item)
                       <option value="{{ $item->id }}">{{ $item->opcion }}</option>
@@ -231,10 +243,6 @@
                   <label for="" class="control-label">Seleccione JUZGADO</label>
                   <select name="juzgado" id="juzgado" class="form-control">
                     <option value="">Seleccione</option>
-                    @foreach ($juzgado as $item)
-                    <option value="{{ $item->id }}">{{ $item->relacion }} {{ $item->opcion }}</option>
-                    @endforeach
-
                   </select>
               </div>
 
@@ -242,16 +250,12 @@
               <div class="form-group">
                   <label for="" class="control-label">Seleccione SECRETARIA</label>
                   <select name="secretaria" id="secretaria" class="form-control">
-                      <option value="">Seleccione</option>
-                      @foreach ($secretaria as $categoria)
-                      <option value="{{ $item->id }}">{{ $item->relacion }} {{ $item->opcion }}</option>
-                      @endforeach
                   </select>
               </div>
 
               <div class="form-group">
                   <label for="hecho" class="control-label">HECHO</label>
-                  <select name="hecho" class="form-control" required>
+                  <select name="hecho" class="form-control js-example-basic-single" required>
                       <option value="">Seleccione</option>
                       @foreach ($hechos as $item)
                       <option value="{{ $item->delito }}">{{ $item->delito }}</option>
@@ -261,7 +265,7 @@
 
               <div class="form-group">
                   <label for="modus_operandi_fk" class="control-label">MODUS OPERANDI</label>
-                  <select name="modus_operandi_fk" class="form-control" required>
+                  <select name="modus_operandi_fk" class="form-control js-example-basic-single" required>
                       <option value="">Seleccione</option>
                       @foreach ($modusoperandys as $item)
                       <option value="{{ $item->id }}">{{ $item->modus_operandi }}</option>
@@ -552,6 +556,23 @@
                   <input type="number" name="detenido_mayor_18" class="form-control" value="{{ $denuncia->detenido_mayor_18 }}">
               </div>
 
+  <div class="form-group">
+    @map([
+          'lat' => $denuncia->latitud,
+          'lng' =>  $denuncia->longitud,
+          'zoom' => 14,
+          'markers' => [
+          [
+              'title' => $denuncia->tipo_hecho,
+              'lat' => $denuncia->latitud,
+              'lng' =>  $denuncia->longitud,
+              'icon' => 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png',
+              'icon_size' => [20, 32],
+              'icon_anchor' => [0, 32],
+          ],
+        ],
+      ])
+  </div>
               <!-- Boton Modificar -->
               <br />
               <div class="form-group">
@@ -563,11 +584,69 @@
       </div>
     </div>
 
-@endsection
+<!-- CUSTOM -->
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 
-@section('scripts')
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ajaxy/1.6.1/scripts/jquery.ajaxy.min.js"></script>
+<!--  SELECT 2-->
+<script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
 
+<!-- SELECT 2-->
+<script>
+  $(document).ready(function() {
+      $('.js-example-basic-single').select2();
+  });
+</script>
+
+<!-- Select Anidados -->
+<script>
+  $(document).ready(function(){
+    $("#circunscripcion_judicial").change(function(){
+      var item = $(this).val();
+      $.get('/comisaria/public/productByCategory/'+item, function(data){
+//esta el la peticion get, la cual se divide en tres partes. ruta,variables y funcion
+        console.log(data);
+          var producto_select = '<option value="">Seleccione Juzgado</option>'
+            for (var i=0; i<data.length;i++)
+              producto_select+='<option value="'+data[i].id+'">'+data[i].opcion+'</option>';
+
+            $("#juzgado").html(producto_select);
+
+      });
+    });
+  });
+
+  $(document).ready(function(){
+    $("#juzgado").change(function(){
+      var item = $(this).val();
+      $.get('/comisaria/public/productBySecretaria/'+item, function(data){
+//esta el la peticion get, la cual se divide en tres partes. ruta,variables y funcion
+        console.log(data);
+          var producto_select = '<option value="">Seleccione Secretaria</option>'
+            for (var i=0; i<data.length;i++)
+              producto_select+='<option value="'+data[i].id+'">'+data[i].opcion+'</option>';
+
+            $("#secretaria").html(producto_select);
+
+      });
+    });
+  });
+</script>
+
+@mapscripts
+<!-- Make sure you put this AFTER Leaflet's CSS -->
+<script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+crossorigin=""></script>
+
+<script>
+      window.addEventListener('LaravelMaps:MarkerClicked', function (event) {
+    var element = event.detail.element;
+    var map = event.detail.map;
+    var marker = event.detail.marker;
+    var service = event.detail.service;
+    console.log('marker clicked', element, map, marker, service);
+});
+</script>
 
 @endsection
