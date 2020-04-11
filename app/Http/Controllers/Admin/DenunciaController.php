@@ -35,20 +35,20 @@ use App\TipoSuicidio;
 use App\TipoSiNo;
 use App\VehiculoRobado;
 use App\TipoHecho;
-
+use App\Dependencia;
 
 class DenunciaController extends Controller
 {
-//Select Anidados
-  public function byCategory($id)
-  {
-     return Juzgado::where('relacion', $id)->get();
-  }
+  //Select Anidados
+    public function byCategory($id)
+    {
+       return Juzgado::where('relacion', $id)->get();
+    }
 
-  public function bySecretaria($id)
-  {
-     return Secretaria::where('relacion', $id)->get();
-  }
+    public function bySecretaria($id)
+    {
+       return Secretaria::where('relacion', $id)->get();
+    }
 
 
 //Index
@@ -118,7 +118,6 @@ class DenunciaController extends Controller
     public function edit($id)
     {
 
-
         $denuncia = Denuncias::findOrFail($id);
         $localidades = Localidad::all();
         $tipo_inculpado = TipoInculpado::orderBy('tipo', 'ASC')->get();
@@ -144,16 +143,17 @@ class DenunciaController extends Controller
         $tipo_suicidio = TipoSuicidio::orderBy('id', 'ASC')->get();
         $tipo_si_no = TipoSiNo::orderBy('id', 'ASC')->get();
         $tipo_hecho = TipoHecho::orderBy('id', 'ASC')->get();
+        $dependencia = Dependencia::orderBy('dependencia', 'ASC')->get();
 
-
-        return view('admin.denuncias.edit')->with(compact('denuncia', 'localidades', 'tipo_inculpado', 'sexo', 'tipo_rango_edad', 'tipo_lugar_hecho', 'tipo_via', 'circunscripcion', 'juzgado', 'secretaria', 'hechos', 'modusoperandys', 'origen_instruccions', 'tipo_vinculo', 'tipo_semaforo', 'tipo_muerte_vial', 'tipo_condicion_climatica', 'tipo_clase_victima_vial', 'tipo_vehiculo_victima', 'tipo_arma', 'tipo_ocasion_homicidio', 'tipo_persona', 'tipo_suicidio', 'tipo_si_no', 'tipo_hecho'));
+        return view('admin.denuncias.edit')->with(compact('denuncia', 'localidades', 'tipo_inculpado', 'sexo', 'tipo_rango_edad', 'tipo_lugar_hecho', 'tipo_via', 'circunscripcion', 'juzgado', 'secretaria', 'hechos', 'modusoperandys', 'origen_instruccions', 'tipo_vinculo', 'tipo_semaforo', 'tipo_muerte_vial', 'tipo_condicion_climatica', 'tipo_clase_victima_vial', 'tipo_vehiculo_victima', 'tipo_arma', 'tipo_ocasion_homicidio', 'tipo_persona', 'tipo_suicidio', 'tipo_si_no', 'tipo_hecho', 'dependencia'));
     }
+
 
 //Update
     public function update($id, Request $request)
     {
 
-        $this->validate($request, $rules, $messages);
+        // $this->validate($request, $rules, $messages);
 
         $denuncia = Denuncias::findOrFail($id);
 
@@ -177,7 +177,7 @@ class DenunciaController extends Controller
         $denuncia->relato = $request->input('relato');
         $denuncia->latitud = $request->input('latitud');
         $denuncia->longitud = $request->input('longitud');
-        $denuncia->estado = 0;
+        $denuncia->estado = 1;
 
         $denuncia->save();
 
@@ -226,6 +226,14 @@ class DenunciaController extends Controller
         $preventivo_judicial->detenido_mayor_18 = $request->input('detenido_mayor_18');
         $preventivo_judicial->latitud = $request->input('latitud');
         $preventivo_judicial->longitud = $request->input('longitud');
+        $preventivo_judicial->nro_preventivo = $request->input('nro_preventivo');
+        $preventivo_judicial->anio_preventivo = $request->input('anio_preventivo');
+        $preventivo_judicial->dependencia = $request->input('dependencia');
+        $preventivo_judicial->estado = 1;
+
+        // complemento datos de la denuncia online
+        $preventivo_judicial->fecha_hecho = $request->input('fecha_hecho'); 
+
 
         //edito el formato de la fecha
         $date = Carbon::now();
@@ -312,5 +320,29 @@ class DenunciaController extends Controller
         }
 
 
+        //Edit Nro Preventivo
+            public function editNroPreventivo($id)
+            {
+                $denuncia = Denuncias::findOrFail($id);
+                $dependencia = Dependencia::orderBy('dependencia', 'ASC')->get();
+
+                return view('admin.denuncias.asignar_nro_preventivo')->with(compact('denuncia', 'dependencia'));
+            }
+
+        //Update Nro Preventivo
+            public function updateNroPreventivo($id, Request $request)
+            {
+                  // Asignacion de Nro de Preventivo
+                $preventivo_judicial = new PreventivoJudicial();
+
+                $preventivo_judicial->nro_preventivo = $request->input('nro_preventivo');
+                $preventivo_judicial->anio_preventivo = $request->input('anio_preventivo');
+                $preventivo_judicial->dependencia = $request->input('dependencia');
+                $preventivo_judicial->estado = 2;
+
+                $preventivo_judicial->save();
+
+                return back()->with('notification', 'Modificado Exitosamente!!!');
+            }
 
 }

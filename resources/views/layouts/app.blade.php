@@ -127,16 +127,16 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <!-- REQUIRED SCRIPTS -->
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <!-- jQuery -->
-<!-- <script src="{!! asset('adminlte/plugins/jquery/jquery.min.js') !!}"></script> -->
+<script src="{!! asset('adminlte/plugins/jquery/jquery.min.js') !!}"></script>
 <!-- DataTables -->
 <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
 <!-- Bootstrap 4 -->
 <script src="{!! asset('adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js') !!}"></script>
 <!-- AdminLTE App -->
-<!-- <script src="{!! asset('adminlte/dist/js/adminlte.min.js') !!}"></script> -->
+<script src="{!! asset('adminlte/dist/js/adminlte.min.js') !!}"></script>
 <!-- Selected Anidados -->
-<!-- <script src="{!! asset('js/admin/denuncias/edit.js') !!}"></script> -->
+<script src="{!! asset('js/admin/denuncias/edit.js') !!}"></script>
 <!-- Select2 -->
 <script src="{!! asset('select2-4.0.13/dist/js/select2.min.js') !!}"></script>
 

@@ -82,4 +82,9 @@ class PreventivoJudicial extends Model
       'direccion_gps',
       'recupero_sustraido'
   ];
+
+  public function dependencias()
+  {
+      return $this->hasMany('App\Dependencia');
+  }
 }

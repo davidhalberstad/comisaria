@@ -37,7 +37,7 @@ Route::group(['middleware'=>'admin', 'namespace'=>'Admin'], function (){
     Route::get('/home', 'DenunciaController@home')->name('home');
 
 
-  // Route::resource('/denuncia', 'DenunciaController');
+   Route::resource('/denuncia', 'DenunciaController');
 
 //select anidado
 
@@ -53,7 +53,9 @@ Route::get('productBySecretaria/{id}', 'DenunciaController@bySecretaria')->name(
   //Vista del Reporte de Denuncia
   Route::get('/reporte_denuncia/{id}', 'DenunciaController@reporteDenuncia')->name('reporte_denuncia');
 
-
+  //Numero de Preventivo
+  Route::get('/asignar_nro_preventivo/{id}', 'DenunciaController@editNroPreventivo')->name('editNroPreventivo');
+  Route::post('/asignar_nro_preventivo/{id}', 'DenunciaController@updateNroPreventivo');
 
     // // Users
     // Route::get('/usuarios', 'UserController@index');

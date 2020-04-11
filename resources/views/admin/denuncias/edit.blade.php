@@ -3,6 +3,10 @@
 @section('content')
 <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" />
 <link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet" />
+
+<!-- alertas -->
+<link href="https://cdn.jsdelivr.net/npm/alertifyjs@1.11.0/build/css/alertify.min.css" rel="stylesheet"/>
+
 @mapstyles
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
   integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
@@ -17,6 +21,7 @@
                 <div class="alert alert-success">
                     {{ session('notification') }}
                 </div>
+
             @endif
       </div>
 
@@ -153,6 +158,17 @@
               <div class="form-group">
                   <h3>*COMPLEMENTAR LA DENUNCIA* </h3>
               </div>
+
+              <div class="form-group">
+                  <label for="dependencia">Tipo Inculpado </label>
+                  <select name="dependencia" class="form-control js-example-basic-single" required >
+                    <option value="">Seleccione</option>
+                      @foreach( $dependencia as $category )
+                      <option value="{{ $category->dependencia }}">{{ $category->dependencia }}</option>
+                      @endforeach
+                  </select>
+              </div>
+
               <div class="form-group">
                   <label for="inculpado">Tipo Inculpado </label>
                   <select name="inculpado" class="form-control">
@@ -230,7 +246,7 @@
               <!-- Select Padre -->
               <div class="form-group">
                   <label for="" class="control-label">Seleccione CIRCUNSCRIPCION JUDICIAL</label>
-                  <select name="circunscripcion_judicial" id="circunscripcion_judicial" class="form-control">
+                  <select name="circunscripcion_judicial" id="circunscripcion_judicial" class="form-control" required >
                       <option value="">Seleccione</option>
                       @foreach ($circunscripcion as $item)
                       <option value="{{ $item->id }}">{{ $item->opcion }}</option>
@@ -241,7 +257,7 @@
         <!-- Select Hijo Nivel 1 -->
               <div class="form-group">
                   <label for="" class="control-label">Seleccione JUZGADO</label>
-                  <select name="juzgado" id="juzgado" class="form-control">
+                  <select name="juzgado" id="juzgado" class="form-control" required>
                     <option value="">Seleccione</option>
                   </select>
               </div>
@@ -249,7 +265,7 @@
         <!-- Select Hijo Nivel 2 -->
               <div class="form-group">
                   <label for="" class="control-label">Seleccione SECRETARIA</label>
-                  <select name="secretaria" id="secretaria" class="form-control">
+                  <select name="secretaria" id="secretaria" class="form-control" required>
                   </select>
               </div>
 
@@ -556,23 +572,58 @@
                   <input type="number" name="detenido_mayor_18" class="form-control" value="{{ $denuncia->detenido_mayor_18 }}">
               </div>
 
-  <div class="form-group">
-    @map([
-          'lat' => $denuncia->latitud,
-          'lng' =>  $denuncia->longitud,
-          'zoom' => 14,
-          'markers' => [
-          [
-              'title' => $denuncia->tipo_hecho,
-              'lat' => $denuncia->latitud,
-              'lng' =>  $denuncia->longitud,
-              'icon' => 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png',
-              'icon_size' => [20, 32],
-              'icon_anchor' => [0, 32],
-          ],
-        ],
-      ])
-  </div>
+<!-- mapa -->
+            <p>
+              <a class="btn btn-light" data-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="true" aria-controls="multiCollapseExample1">Visualizar el punto en el Mapa</a>
+            </p>
+            <div class="row">
+              <div class="col">
+                <div class="collapse multi-collapse" id="multiCollapseExample1">
+                  <div class="form-group">
+                      @map([
+                            'lat' => $denuncia->latitud,
+                            'lng' =>  $denuncia->longitud,
+                            'zoom' => 14,
+                            'markers' => [
+                            [
+                                'title' => $denuncia->tipo_hecho,
+                                'lat' => $denuncia->latitud,
+                                'lng' =>  $denuncia->longitud,
+                                'popup' => $denuncia->relato,
+                                'icon' => 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png',
+                                'icon_size' => [20, 32],
+                                'icon_anchor' => [0, 32],
+                            ],
+                          ],
+                        ])
+                    </div>
+                  </div>
+                </div>
+            </div>
+<!-- fin mapa -->
+
+            <!-- Comienza la Asignacion del numero de Prenventivo -->
+            <hr> </hr>
+            <div class="form-group">
+                <h3>*ASIGNAR NUMERO DE PREVENTIVO JUDICIAL* </h3>
+            </div>
+
+            <div class="form-group">
+                <label for="nro_preventivo">Nro Preventivo </label>
+                <input type="text" name="nro_preventivo" class="form-control" value="{{ $denuncia->nro_preventivo }}" required >
+            </div>
+
+            <div class="form-group">
+                <label for="anio_preventivo">Año del Preventivo </label>
+                <input type="number" name="anio_preventivo" min="2018" max="2050" class="form-control" value="{{ $denuncia->anio_preventivo }}" required >
+            </div>
+
+            <div class="form-group">
+                <label for="fecha_preventivo">Fecha del Preventivo </label>
+                <input type="date" name="fecha_preventivo" class="form-control" value="{{ $preventivo_judicial->fecha_preventivo }}">
+            </div>
+
+
               <!-- Boton Modificar -->
               <br />
               <div class="form-group">
@@ -587,6 +638,9 @@
 <!-- CUSTOM -->
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+<!-- alertas -->
+<script src="https://cdn.jsdelivr.net/npm/alertifyjs@1.11.0/build/alertify.min.js"></script>
 
 <!--  SELECT 2-->
 <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
@@ -640,13 +694,22 @@ integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUT
 crossorigin=""></script>
 
 <script>
-      window.addEventListener('LaravelMaps:MarkerClicked', function (event) {
+  window.addEventListener('LaravelMaps:MapInitialized', function (event) {
     var element = event.detail.element;
     var map = event.detail.map;
-    var marker = event.detail.marker;
+    var markers = event.detail.markers;
     var service = event.detail.service;
-    console.log('marker clicked', element, map, marker, service);
-});
+    console.log('map initialized', element, map, markers, service);
+  });
+
+  window.addEventListener('LaravelMaps:MarkerClicked', function (event) {
+      var element = event.detail.element;
+      var map = event.detail.map;
+      var marker = event.detail.marker;
+      var service = event.detail.service;
+      console.log('marker clicked', element, map, marker, service);
+  });
 </script>
+
 
 @endsection
